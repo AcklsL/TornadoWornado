@@ -9,8 +9,5 @@
         <module name="TornadoWornado" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="TornadoWornado" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
