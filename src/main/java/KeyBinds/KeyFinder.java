@@ -1,3 +1,5 @@
+package KeyBinds;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
