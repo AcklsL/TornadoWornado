@@ -2,25 +2,23 @@ import KeyBinds.*;
 import Maps.DefaultMap;
 import Maps.ObjectMap;
 import Rendering.ObjectRenderer;
-import Utility.GLInstruct;
 import Utility.GameObject;
+import Utility.HeldItem;
 import Utility.Sprite;
+import Utility.onHit;
+import Weapons.Melee.Iron_Shortsword;
+import Weapons.Weapon;
 import com.jogamp.opengl.util.FPSAnimator;
-import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureIO;
 
-import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.awt.GLCanvas;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,6 +30,7 @@ public class StartGame {
     private static FPSAnimator animator;
     private static KeyFinder listener;
     private static ObjectRenderer renderer;
+    private static MouseEvents mouseListener;
 
     private static final int canvasX = 500;
     private static final int canvasY = 500;
@@ -42,11 +41,12 @@ public class StartGame {
 
     private static double fallSpeed = 0.01;
     private static double moveSpeed = 0.01;
+    private static Iron_Shortsword test;
 
     private static Sprite character;
     private static ObjectMap currentMap;
 
-    protected static ArrayList<Integer> keys;
+    private static ArrayList<Integer> keys;
 
     public static void main(String[] args) {
         init();
@@ -55,7 +55,7 @@ public class StartGame {
     /**
      * Ran at beginning of program to initialize everything.
      */
-    public static void init() {
+     private static void init() {
         frame = new JFrame(canvasTitle);
         canvas = new GLCanvas();
         animator = new FPSAnimator(canvas, fps);
@@ -64,9 +64,11 @@ public class StartGame {
         renderer = new ObjectRenderer();
         canJump = true;
         timer = new Timer();
+        mouseListener = new MouseEvents();
 
         frame.getContentPane().add(listener);
         frame.getContentPane().add(canvas);
+        canvas.addMouseListener(mouseListener);
 
         {
             //W Key
@@ -110,6 +112,8 @@ public class StartGame {
             listener.getActionMap().put("Space key release", new SpaceKeyR(keys));
         }
 
+        canvas.setFocusable(false);
+
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -133,9 +137,16 @@ public class StartGame {
              * Ran at the start of program
              */
             public void init(GLAutoDrawable glAutoDrawable) {
-                character = new Sprite("Character",-0.5,0.5,0.125,0.125,new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\nou.png"));
+                character = new Sprite("Character", 100, -0.5, 0.5, 0.125, 0.125,
+                        new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\nou.png"), new onHit() {
+                    public void onHitAction(Weapon in) {
+                        System.out.println(in.getHolder().getIdentifier() + " struck character for " + in.getDamage() + " damage with " + in.getName());
+                    }
+                });
+                test = new Iron_Shortsword(character);
                 currentMap = new DefaultMap();
                 renderer.addObjectToScreen(character);
+                renderer.addObjectToScreen(test.getImage());
                 renderer.addMapToScreen(currentMap);
                 renderer.createInstruct();
                 moveSpeed = currentMap.getMoveSpeed();
@@ -156,10 +167,9 @@ public class StartGame {
                 GL2 gl = glAutoDrawable.getGL().getGL2();
                 gl.glLoadIdentity();
                 gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
-                gl.glClear(GL2.GL_DEPTH_BUFFER_BIT);
                 if (keys != null) keyTest();
-                renderer.getInstruct().instruct(glAutoDrawable);
                 physics();
+                renderer.getInstruct().instruct(glAutoDrawable);
             }
 
             /**
@@ -175,14 +185,34 @@ public class StartGame {
     }
 
     private static void keyTest() {
-        if (listener.containsKey(KeyEvent.VK_W)) {
-
+        mouseListener.refreshMouseLocation();
+        if (mouseListener.isLMB()) {
+            System.out.println("LMB");
+            if (character.holdingItem()) {
+                character.getItem().onLeftClick();
+            }
         }
+
+        if (mouseListener.isMMB()) {
+            System.out.println("MMB");
+            if (character.holdingItem()) {
+                character.getItem().onMiddleClick();
+            }
+        }
+
+        if (mouseListener.isRMB()) {
+            System.out.println("RMB");
+            if (character.holdingItem()) {
+                character.getItem().onRightClick();
+            }
+        }
+
+        //if (listener.containsKey(KeyEvent.VK_W)) { }
 
         if (listener.containsKey(KeyEvent.VK_A)) {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character) {
+                if (i != character && !(i instanceof HeldItem)) {
                     if (character.isTouchingEast(i) && !character.isTouchingNorth(i)) {
                         move = false;
                     }
@@ -197,14 +227,12 @@ public class StartGame {
             }
         }
 
-        if (listener.containsKey(KeyEvent.VK_S)) {
-
-        }
+        //if (listener.containsKey(KeyEvent.VK_S)) { }
 
         if (listener.containsKey(KeyEvent.VK_D)) {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character) {
+                if (i != character && !(i instanceof HeldItem)) {
                     if (character.isTouchingWest(i) && !character.isTouchingNorth(i)) {
                         move = false;
                     }
@@ -222,7 +250,7 @@ public class StartGame {
         if (listener.containsKey(KeyEvent.VK_SPACE)) {
             for (GameObject i : ObjectRenderer.getImages()) {
                 if (!character.isTouchingSouth(i) && i != character && canJump) {
-                    character.moveSpritePosBy(0.0,0.0065);
+                    character.moveSpritePosBy(0.0,0.005);
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
@@ -246,13 +274,15 @@ public class StartGame {
         for (Sprite sprite : ObjectRenderer.getSprites()) {
             toFall.add(sprite);
             for (GameObject object : ObjectRenderer.getImages()) {
-                if (sprite != object) {
+                if (sprite != object && !(object instanceof HeldItem)) {
                     if (sprite.isTouchingNorth(object)) {
                         toFall.remove(sprite);
                         canJump = true;
+                        break;
                     } else if (!(sprite.getyPos() > -1.0)) {
                         toFall.remove(sprite);
                         canJump = true;
+                        break;
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package Utility;
 
 import Rendering.ObjectRenderer;
+import Weapons.Weapon;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureIO;
 
@@ -20,8 +21,13 @@ public class Sprite extends GameObject {
     private double yPos;
     private double height;
     private double width;
+    private onHit onHit;
 
-    public Sprite(String identity, final double x, final double y, final double w, final double h, final File spriteImage) {
+    private Weapon hasItem;
+
+    private int health;
+
+    public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in) {
         super(identity,false, x, y, w, h, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) { }
         });
@@ -29,30 +35,12 @@ public class Sprite extends GameObject {
         yPos = y;
         width = w;
         height = h;
+        this.health = health;
+        onHit = in;
+        hasItem = null;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                GL2 tempGL = glAutoDrawable.getGL().getGL2();
-                try {
-                    Texture texture = TextureIO.newTexture(spriteImage, true);
-                    texture.enable(tempGL);
-                    texture.bind(tempGL);
-
-                    tempGL.glBegin(tempGL.GL_POLYGON);
-                    tempGL.glTexCoord2d(0.0,0.0);
-                    tempGL.glVertex2d(xPos,yPos);
-                    tempGL.glTexCoord2d(1.0,0.0);
-                    tempGL.glVertex2d(xPos + w, yPos);
-                    tempGL.glTexCoord2d(1.0,1.0);
-                    tempGL.glVertex2d(xPos + w, yPos + h);
-                    tempGL.glTexCoord2d(0.0,1.0);
-                    tempGL.glVertex2d(xPos,yPos + h);
-
-                    tempGL.glEnd();
-                    tempGL.glFlush();
-                } catch (IOException e) {
-                    System.err.println("File not found for sprite: " + spriteImage.getName());
-                    System.exit(-1);
-                }
+                QuickDraw.quickTexture(charSprite, xPos, yPos, width, height, glAutoDrawable);
             }
         });
         charSprite = spriteImage;
@@ -70,6 +58,22 @@ public class Sprite extends GameObject {
         super.movePosBy(x,y);
         xPos += x;
         yPos += y;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public onHit getOnHit() {
+        return onHit;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void changeHealth(int dmg) {
+        this.health += dmg;
     }
 
     public void moveSpritePosTo(double x, double y) {
@@ -109,5 +113,17 @@ public class Sprite extends GameObject {
 
     public void setWidth(double width) {
         this.width = width;
+    }
+
+    public boolean holdingItem() {
+        return hasItem != null;
+    }
+
+    public Weapon getItem() {
+        return hasItem;
+    }
+
+    public void setItem(Weapon in) {
+        hasItem = in;
     }
 }

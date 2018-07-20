@@ -4,6 +4,7 @@ import Maps.Layer;
 import Maps.ObjectMap;
 import Utility.GLInstruct;
 import Utility.GameObject;
+import Utility.HeldItem;
 import Utility.Sprite;
 
 import javax.imageio.ImageIO;
@@ -25,18 +26,23 @@ public class ObjectRenderer {
      */
     private static ArrayList<GameObject> images;
     private static ArrayList<Sprite> sprites;
+    private static ArrayList<HeldItem> heldItems;
 
     private GLInstruct instruct;
 
     public ObjectRenderer() {
         images = new ArrayList<GameObject>();
         sprites = new ArrayList<Sprite>();
+        heldItems = new ArrayList<HeldItem>();
     }
 
     public void addObjectToScreen(GameObject image) {
         images.add(image);
         if (image instanceof Sprite) {
             sprites.add((Sprite) image);
+        }
+        if (image instanceof HeldItem) {
+            heldItems.add((HeldItem) image);
         }
     }
 
@@ -74,6 +80,10 @@ public class ObjectRenderer {
 
     public static ArrayList<Sprite> getSprites() {
         return sprites;
+    }
+
+    public static ArrayList<HeldItem> getHeldItems() {
+        return heldItems;
     }
 
     /**
