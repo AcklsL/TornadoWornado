@@ -1,5 +1,6 @@
 package Utility;
 
+import NPC.AI.BaseAI;
 import Rendering.ObjectRenderer;
 import Weapons.Weapon;
 import com.jogamp.opengl.util.texture.Texture;
@@ -22,12 +23,13 @@ public class Sprite extends GameObject {
     private double height;
     private double width;
     private onHit onHit;
+    private BaseAI AI;
 
     private Weapon hasItem;
 
     private int health;
 
-    public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in) {
+    public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in, BaseAI ai) {
         super(identity,false, x, y, w, h, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) { }
         });
@@ -44,6 +46,15 @@ public class Sprite extends GameObject {
             }
         });
         charSprite = spriteImage;
+        AI = ai;
+    }
+
+    public BaseAI getAI() {
+        return AI;
+    }
+
+    public void setAI(BaseAI AI) {
+        this.AI = AI;
     }
 
     public File getCharSprite() {

@@ -2,6 +2,8 @@ package Utility;
 
 import Utility.GLInstruct;
 
+import javax.media.opengl.GLAutoDrawable;
+
 
 public class GameObject {
 
@@ -15,13 +17,17 @@ public class GameObject {
 
     private final double boundTolerance = 0.005; // MUST BE LESS THAN 0.1! Otherwise things get janky.
 
-    public GameObject(String identity, boolean background, double xPos, double yPos, double xBound, double yBound, GLInstruct objectRender) {
+    public GameObject(String identity, boolean background, double xPos, double yPos, double xBound, double yBound, final GLInstruct objectRender) {
         identifier = identity;
         x = xPos;
         y = yPos;
         this.xBound = xBound;
         this.yBound = yBound;
-        render = objectRender;
+        render = new GLInstruct() {
+            public void instruct(GLAutoDrawable glAutoDrawable) {
+                objectRender.instruct(glAutoDrawable);
+            }
+        };
         isBackground = background;
     }
 

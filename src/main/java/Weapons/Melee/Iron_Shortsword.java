@@ -6,12 +6,15 @@ import Utility.Sprite;
 
 import javax.media.opengl.GLAutoDrawable;
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Iron_Shortsword extends Melee{
 
     private final int durability = 100;
     private final int damage = 5;
-    private final int swingSpeed = 1;
+    private final int swingSpeed = 500;
+    private boolean canSwing;
     private HeldItem image; //PLACEHOLDER IMAGE
     private final String name = "Iron_Shortsword";
     private final RARITIES rarity = RARITIES.COMMON;
@@ -21,11 +24,20 @@ public class Iron_Shortsword extends Melee{
         pre_equip = holder.getRenderInstructions();
         image = new HeldItem("Iron_Shortsword", holder, 0.055,0.055, new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"));
         holder.setItem(this);
+        canSwing = true;
     }
 
     public void unequip() {
         image.getHolder().setRenderInstructions(pre_equip);
         //image = null;
+    }
+
+    public boolean canSwing() {
+        return canSwing;
+    }
+
+    public void setCanSwing(boolean in) {
+        canSwing = in;
     }
 
     public int getSwingSpeed() {
@@ -57,7 +69,16 @@ public class Iron_Shortsword extends Melee{
     }
 
     public void onLeftClick() {
-        image.swing(this);
+        if (canSwing) {
+            image.swing(this);
+            canSwing = false;
+            (new Timer()).schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    canSwing = true;
+                }
+            },swingSpeed);
+        }
     }
 
     public void onRightClick() {

@@ -1,6 +1,9 @@
 import KeyBinds.*;
 import Maps.DefaultMap;
 import Maps.ObjectMap;
+import NPC.AI.BaseAI;
+import NPC.AI.BasicMeleeAI;
+import NPC.AI.PlayerAI;
 import Rendering.ObjectRenderer;
 import Utility.GameObject;
 import Utility.HeldItem;
@@ -38,12 +41,13 @@ public class StartGame {
     private static int fps = 60; //Not actual fps
     private static Timer timer;
     private static boolean canJump;
+    private static boolean inAir;
 
-    private static double fallSpeed = 0.01;
-    private static double moveSpeed = 0.01;
     private static Iron_Shortsword test;
 
     private static Sprite character;
+    private static Sprite testSprite;
+    private static PlayerAI playerAI;
     private static ObjectMap currentMap;
 
     private static ArrayList<Integer> keys;
@@ -65,6 +69,7 @@ public class StartGame {
         canJump = true;
         timer = new Timer();
         mouseListener = new MouseEvents();
+        playerAI = new PlayerAI();
 
         frame.getContentPane().add(listener);
         frame.getContentPane().add(canvas);
@@ -137,20 +142,27 @@ public class StartGame {
              * Ran at the start of program
              */
             public void init(GLAutoDrawable glAutoDrawable) {
-                character = new Sprite("Character", 100, -0.5, 0.5, 0.125, 0.125,
+                character = new Sprite("Character", 100, 0.0, 0.5, 0.125, 0.125,
                         new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\nou.png"), new onHit() {
                     public void onHitAction(Weapon in) {
                         System.out.println(in.getHolder().getIdentifier() + " struck character for " + in.getDamage() + " damage with " + in.getName());
                     }
-                });
+                }, playerAI);
+                testSprite = new Sprite("testSprite", 100, -0.5, 0.0, 0.125, 0.125,
+                        new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"), new onHit() {
+                    public void onHitAction(Weapon in) {
+                        System.out.println(in.getHolder().getIdentifier() + " struck testSprite for " + in.getDamage() + " damage with " + in.getName());
+                    }
+                }, new BasicMeleeAI(character));
+                playerAI.supplySprite(character);
+                testSprite.getAI().supplySprite(testSprite);
                 test = new Iron_Shortsword(character);
                 currentMap = new DefaultMap();
                 renderer.addObjectToScreen(character);
+                renderer.addObjectToScreen(testSprite);
                 renderer.addObjectToScreen(test.getImage());
                 renderer.addMapToScreen(currentMap);
                 renderer.createInstruct();
-                moveSpeed = currentMap.getMoveSpeed();
-                fallSpeed = currentMap.getFallSpeed();
             }
 
             /**
@@ -169,6 +181,9 @@ public class StartGame {
                 gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
                 if (keys != null) keyTest();
                 physics();
+                for (Sprite i : ObjectRenderer.getSprites()) {
+                    i.getAI().nextMove();
+                }
                 renderer.getInstruct().instruct(glAutoDrawable);
             }
 
@@ -210,41 +225,15 @@ public class StartGame {
         //if (listener.containsKey(KeyEvent.VK_W)) { }
 
         if (listener.containsKey(KeyEvent.VK_A)) {
-            boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !(i instanceof HeldItem)) {
-                    if (character.isTouchingEast(i) && !character.isTouchingNorth(i)) {
-                        move = false;
-                    }
-                }
-            }
-            if (move) {
-                for (GameObject i : ObjectRenderer.getImages()) {
-                    if (i != character) {
-                        i.movePosBy(moveSpeed, 0.0);
-                    }
-                }
-            }
+            character.getAI().onLeftMovement();
         }
 
-        //if (listener.containsKey(KeyEvent.VK_S)) { }
+        if (listener.containsKey(KeyEvent.VK_S)) {
+            character.getAI().onDownMovement();
+        }
 
         if (listener.containsKey(KeyEvent.VK_D)) {
-            boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !(i instanceof HeldItem)) {
-                    if (character.isTouchingWest(i) && !character.isTouchingNorth(i)) {
-                        move = false;
-                    }
-                }
-            }
-            if (move) {
-                for (GameObject i : ObjectRenderer.getImages()) {
-                    if (i != character) {
-                        i.movePosBy(-moveSpeed, 0.0);
-                    }
-                }
-            }
+            character.getAI().onRightMovement();
         }
 
         if (listener.containsKey(KeyEvent.VK_SPACE)) {
@@ -288,7 +277,11 @@ public class StartGame {
             }
         }
         for (Sprite sprite : toFall) {
-            sprite.moveSpritePosBy(0.0, -fallSpeed);
+            sprite.moveSpritePosBy(0.0, -0.01);
         }
+    }
+
+    public static Sprite getCharacter() {
+         return character;
     }
 }

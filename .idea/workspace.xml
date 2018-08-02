@@ -2,35 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b06e4b4a-5135-4f09-a83d-71d6ff8bb9a0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/KeyBinds/MouseEvents.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/HeldItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Utility/onHit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Weapons/Melee/Melee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Weapons/Weapon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/NPC/AI/BaseAI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/NPC/AI/BasicMeleeAI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/NPC/AI/PlayerAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/StartGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StartGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Utility/GameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/GameObject.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Utility/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Utility/Sprite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Maps/DefaultMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Maps/DefaultMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/StartGame$1$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/StartGame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartGame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StartGame$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartGame$2$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/StartGame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartGame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StartGame$3$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/StartGame$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartGame$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/StartGame$4.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/StartGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/StartGame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Utility/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/GameObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Utility/Sprite$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/Sprite$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Utility/Sprite$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/Sprite$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Utility/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Utility/Sprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Weapons/Melee/Iron_Shortsword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Weapons/Melee/Iron_Shortsword.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,70 +40,37 @@
       <file leaf-file-name="StartGame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/StartGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="109">
-              <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
+            <state relative-caret-position="950">
+              <caret line="238" column="54" lean-forward="true" selection-start-line="238" selection-start-column="54" selection-end-line="238" selection-end-column="54" />
               <folding>
-                <element signature="e#4036#4515#0" expanded="true" />
-                <element signature="e#4191#4482#0" expanded="true" />
-                <element signature="e#4481#4482#0" expanded="true" />
-                <element signature="e#4514#4515#0" expanded="true" />
-                <element signature="e#4966#5229#0" expanded="true" />
-                <element signature="e#5228#5229#0" expanded="true" />
-                <element signature="e#8440#8628#0" expanded="true" />
-                <element signature="e#8627#8628#0" expanded="true" />
+                <element signature="e#4124#4603#0" expanded="true" />
+                <element signature="e#4279#4570#0" expanded="true" />
+                <element signature="e#4569#4570#0" expanded="true" />
+                <element signature="e#4602#4603#0" expanded="true" />
+                <element signature="e#5087#5350#0" expanded="true" />
+                <element signature="e#5349#5350#0" expanded="true" />
+                <element signature="e#5617#5881#0" expanded="true" />
+                <element signature="e#5880#5881#0" expanded="true" />
+                <element signature="e#8008#8196#0" expanded="true" />
+                <element signature="e#8195#8196#0" expanded="true" />
                 <element signature="method#physics#0;class#StartGame#0" />
-                <element signature="e#8974#8982#0" expanded="true" />
-                <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-                <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-                <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-                <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-                <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+                <element signature="e#9560#9568#0" expanded="true" />
+                <element signature="e#10121#10122#0" expanded="true" />
+                <element signature="e#10154#10155#0" expanded="true" />
+                <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+                <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MouseEvents.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/MouseEvents.java">
+      <file leaf-file-name="PlayerAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/PlayerAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-464">
-              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+            <state relative-caret-position="280">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#mouseEntered#0;class#MouseEvents#0" />
-                <element signature="method#mouseExited#0;class#MouseEvents#0" />
-                <element signature="e#1739#1740#0" expanded="true" />
-                <element signature="e#1768#1769#0" expanded="true" />
-                <element signature="e#1798#1799#0" expanded="true" />
-                <element signature="e#1827#1828#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Weapon.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Weapon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Iron_Shortsword.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-116">
-              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#647#648#0" expanded="true" />
-                <element signature="e#687#688#0" expanded="true" />
-                <element signature="e#1047#1048#0" expanded="true" />
-                <element signature="e#1071#1072#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,63 +79,38 @@
       <file leaf-file-name="Sprite.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Utility/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
+            <state relative-caret-position="612">
+              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
               <folding>
-                <element signature="e#2638#2639#0" expanded="true" />
-                <element signature="e#2670#2671#0" expanded="true" />
-                <element signature="e#2712#2713#0" expanded="true" />
-                <element signature="e#2742#2743#0" expanded="true" />
-                <element signature="e#2800#2801#0" expanded="true" />
-                <element signature="e#2828#2829#0" expanded="true" />
+                <element signature="e#1515#1516#0" expanded="true" />
+                <element signature="e#1551#1552#0" expanded="true" />
+                <element signature="e#1579#1580#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameObject.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Utility/GameObject.java">
+      <file leaf-file-name="BaseAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/BaseAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="111" column="37" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
-              <folding>
-                <element signature="method#GameObject#0;class#GameObject#0" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HeldItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Utility/HeldItem.java">
+      <file leaf-file-name="BasicMeleeAI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/BasicMeleeAI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+            <state relative-caret-position="374">
+              <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#585#840#0" expanded="true" />
-                <element signature="e#839#840#0" expanded="true" />
+                <element signature="e#159#160#0" expanded="true" />
+                <element signature="e#178#179#0" expanded="true" />
+                <element signature="e#3419#3420#0" expanded="true" />
+                <element signature="e#3444#3445#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuickDraw.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-203">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Melee.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Melee/Melee.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -198,6 +132,8 @@
       <find>fps</find>
       <find>canvas</find>
       <find>animator</find>
+      <find>character</find>
+      <find>moveSpeed</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,19 +168,23 @@
         <option value="$PROJECT_DIR$/src/main/java/Maps/Layer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Maps/ObjectMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/KeyBinds/MouseEvents.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java" />
         <option value="$PROJECT_DIR$/src/main/java/Utility/onHit.java" />
         <option value="$PROJECT_DIR$/src/main/java/Weapons/Weapon.java" />
         <option value="$PROJECT_DIR$/src/main/java/Weapons/Melee/Melee.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Utility/GameObject.java" />
         <option value="$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKeyR.java" />
         <option value="$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Utility/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java" />
         <option value="$PROJECT_DIR$/src/main/java/Utility/HeldItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Utility/GameObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Utility/Sprite.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NPC/AI/NoAI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NPC/AI/BaseAI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java" />
         <option value="$PROJECT_DIR$/src/main/java/StartGame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NPC/AI/PlayerAI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/NPC/AI/BasicMeleeAI.java" />
       </list>
     </option>
   </component>
@@ -257,7 +197,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-30" />
     <option name="y" value="121" />
     <option name="width" value="1696" />
@@ -268,11 +208,10 @@
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
+      <hideEmptyPackages ProjectPane="false" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -312,7 +251,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="KeyBinds" type="462c0819:PsiDirectoryNode" />
+              <item name="Maps" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TornadoWornado" type="b2602c69:ProjectViewProjectNode" />
@@ -320,7 +259,16 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Maps" type="462c0819:PsiDirectoryNode" />
+              <item name="NPC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TornadoWornado" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TornadoWornado" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="NPC" type="462c0819:PsiDirectoryNode" />
+              <item name="AI" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TornadoWornado" type="b2602c69:ProjectViewProjectNode" />
@@ -330,27 +278,12 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="Utility" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="TornadoWornado" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TornadoWornado" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Weapons" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TornadoWornado" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TornadoWornado" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Weapons" type="462c0819:PsiDirectoryNode" />
-              <item name="Melee" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -458,15 +391,16 @@
       <workItem from="1530807788815" duration="1846000" />
       <workItem from="1530831642275" duration="367000" />
       <workItem from="1530837122119" duration="4639000" />
-      <workItem from="1532109951268" duration="6783000" />
+      <workItem from="1532109951268" duration="8854000" />
+      <workItem from="1533232566635" duration="6819000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81409000" />
+    <option name="totallyTimeSpent" value="90299000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -478,7 +412,7 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42828485" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.30954996" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -490,8 +424,8 @@
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Coverage" order="9" side_tool="true" weight="0.3297619" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -513,54 +447,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/Utility/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/StartGame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3434">
-          <caret line="202" column="60" selection-end-line="216" />
-          <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
-            <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="4" selection-start-line="75" selection-start-column="4" selection-end-line="75" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
         </state>
@@ -571,21 +457,22 @@
         <state relative-caret-position="3434">
           <caret line="202" column="60" selection-end-line="216" />
           <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#4124#4603#0" expanded="true" />
+            <element signature="e#4279#4570#0" expanded="true" />
+            <element signature="e#4569#4570#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
+            <element signature="e#5087#5350#0" expanded="true" />
+            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5617#5881#0" expanded="true" />
+            <element signature="e#5880#5881#0" expanded="true" />
+            <element signature="e#8008#8196#0" expanded="true" />
+            <element signature="e#8195#8196#0" expanded="true" />
             <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+            <element signature="e#9560#9568#0" expanded="true" />
+            <element signature="e#10121#10122#0" expanded="true" />
+            <element signature="e#10154#10155#0" expanded="true" />
+            <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+            <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -619,21 +506,22 @@
         <state relative-caret-position="3587">
           <caret line="211" column="39" selection-start-line="211" selection-start-column="39" selection-end-line="211" selection-end-column="39" />
           <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#4124#4603#0" expanded="true" />
+            <element signature="e#4279#4570#0" expanded="true" />
+            <element signature="e#4569#4570#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
+            <element signature="e#5087#5350#0" expanded="true" />
+            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5617#5881#0" expanded="true" />
+            <element signature="e#5880#5881#0" expanded="true" />
+            <element signature="e#8008#8196#0" expanded="true" />
+            <element signature="e#8195#8196#0" expanded="true" />
             <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+            <element signature="e#9560#9568#0" expanded="true" />
+            <element signature="e#10121#10122#0" expanded="true" />
+            <element signature="e#10154#10155#0" expanded="true" />
+            <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+            <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -667,21 +555,22 @@
         <state relative-caret-position="2023">
           <caret line="119" column="59" selection-start-line="119" selection-start-column="59" selection-end-line="119" selection-end-column="59" />
           <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#4124#4603#0" expanded="true" />
+            <element signature="e#4279#4570#0" expanded="true" />
+            <element signature="e#4569#4570#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
+            <element signature="e#5087#5350#0" expanded="true" />
+            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5617#5881#0" expanded="true" />
+            <element signature="e#5880#5881#0" expanded="true" />
+            <element signature="e#8008#8196#0" expanded="true" />
+            <element signature="e#8195#8196#0" expanded="true" />
             <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+            <element signature="e#9560#9568#0" expanded="true" />
+            <element signature="e#10121#10122#0" expanded="true" />
+            <element signature="e#10154#10155#0" expanded="true" />
+            <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+            <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -715,21 +604,22 @@
         <state relative-caret-position="2142">
           <caret line="141" column="31" selection-start-line="141" selection-start-column="31" selection-end-line="141" selection-end-column="31" />
           <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#4124#4603#0" expanded="true" />
+            <element signature="e#4279#4570#0" expanded="true" />
+            <element signature="e#4569#4570#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
+            <element signature="e#5087#5350#0" expanded="true" />
+            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5617#5881#0" expanded="true" />
+            <element signature="e#5880#5881#0" expanded="true" />
+            <element signature="e#8008#8196#0" expanded="true" />
+            <element signature="e#8195#8196#0" expanded="true" />
             <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+            <element signature="e#9560#9568#0" expanded="true" />
+            <element signature="e#10121#10122#0" expanded="true" />
+            <element signature="e#10154#10155#0" expanded="true" />
+            <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+            <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -836,9 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -870,46 +757,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKeyR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-203">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKeyR.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/ShiftKey.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/AKeyR.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -917,91 +766,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1656#1657#0" expanded="true" />
-            <element signature="e#1687#1688#0" expanded="true" />
-            <element signature="e#1739#1740#0" expanded="true" />
-            <element signature="e#1779#1780#0" expanded="true" />
-            <element signature="e#1834#1835#0" expanded="true" />
-            <element signature="e#1863#1864#0" expanded="true" />
-            <element signature="e#1915#1916#0" expanded="true" />
-            <element signature="e#1945#1946#0" expanded="true" />
-            <element signature="e#2001#2002#0" expanded="true" />
-            <element signature="e#2033#2034#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/GameObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="111" column="37" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
-          <folding>
-            <element signature="method#GameObject#0;class#GameObject#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="126" column="21" selection-start-line="126" selection-start-column="21" selection-end-line="126" selection-end-column="21" />
-          <folding>
-            <element signature="e#2638#2639#0" expanded="true" />
-            <element signature="e#2670#2671#0" expanded="true" />
-            <element signature="e#2712#2713#0" expanded="true" />
-            <element signature="e#2742#2743#0" expanded="true" />
-            <element signature="e#2800#2801#0" expanded="true" />
-            <element signature="e#2828#2829#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Weapon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="16" lean-forward="true" selection-start-column="16" selection-end-column="16" />
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Rendering/ObjectRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
-          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+        <state relative-caret-position="340">
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#647#648#0" expanded="true" />
-            <element signature="e#687#688#0" expanded="true" />
-            <element signature="e#1047#1048#0" expanded="true" />
-            <element signature="e#1071#1072#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Utility/HeldItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+        <state relative-caret-position="102">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#585#840#0" expanded="true" />
-            <element signature="e#839#840#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/KeyBinds/MouseEvents.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-464">
-          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        <state relative-caret-position="17">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#mouseEntered#0;class#MouseEvents#0" />
@@ -1014,26 +812,127 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Weapons/Melee/Iron_Shortsword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-262">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1024#1025#0" expanded="true" />
+            <element signature="e#1054#1055#0" expanded="true" />
+            <element signature="e#1105#1106#0" expanded="true" />
+            <element signature="e#1134#1135#0" expanded="true" />
+            <element signature="e#1772#1920#0" expanded="true" />
+            <element signature="e#1919#1920#0" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="true" />
+            <element signature="e#1786#1787#0" expanded="true" />
+            <element signature="e#1823#1824#0" expanded="true" />
+            <element signature="e#1851#1852#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/QuickDraw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="33" column="9" lean-forward="true" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding>
+            <element signature="e#1515#1516#0" expanded="true" />
+            <element signature="e#1551#1552#0" expanded="true" />
+            <element signature="e#1579#1580#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/BaseAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Maps/DefaultMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="36" column="60" selection-start-line="36" selection-start-column="60" selection-end-line="36" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Utility/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/io/PrintStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="803" column="16" selection-start-line="803" selection-start-column="16" selection-end-line="803" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/PlayerAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/NPC/AI/BasicMeleeAI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="97" column="41" selection-start-line="97" selection-start-column="41" selection-end-line="97" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#159#160#0" expanded="true" />
+            <element signature="e#178#179#0" expanded="true" />
+            <element signature="e#3419#3420#0" expanded="true" />
+            <element signature="e#3444#3445#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/StartGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="114" column="35" selection-start-line="114" selection-start-column="35" selection-end-line="114" selection-end-column="35" />
+        <state relative-caret-position="950">
+          <caret line="238" column="54" lean-forward="true" selection-start-line="238" selection-start-column="54" selection-end-line="238" selection-end-column="54" />
           <folding>
-            <element signature="e#4036#4515#0" expanded="true" />
-            <element signature="e#4191#4482#0" expanded="true" />
-            <element signature="e#4481#4482#0" expanded="true" />
-            <element signature="e#4514#4515#0" expanded="true" />
-            <element signature="e#4966#5229#0" expanded="true" />
-            <element signature="e#5228#5229#0" expanded="true" />
-            <element signature="e#8440#8628#0" expanded="true" />
-            <element signature="e#8627#8628#0" expanded="true" />
+            <element signature="e#4124#4603#0" expanded="true" />
+            <element signature="e#4279#4570#0" expanded="true" />
+            <element signature="e#4569#4570#0" expanded="true" />
+            <element signature="e#4602#4603#0" expanded="true" />
+            <element signature="e#5087#5350#0" expanded="true" />
+            <element signature="e#5349#5350#0" expanded="true" />
+            <element signature="e#5617#5881#0" expanded="true" />
+            <element signature="e#5880#5881#0" expanded="true" />
+            <element signature="e#8008#8196#0" expanded="true" />
+            <element signature="e#8195#8196#0" expanded="true" />
             <element signature="method#physics#0;class#StartGame#0" />
-            <element signature="e#8974#8982#0" expanded="true" />
-            <marker date="1532116750680" expanded="false" signature="2111:3982" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="7442:8033" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8140:8732" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="8787:9263" ph="{...}" />
-            <marker date="1532116750680" expanded="false" signature="9321:9468" ph="{...}" />
+            <element signature="e#9560#9568#0" expanded="true" />
+            <element signature="e#10121#10122#0" expanded="true" />
+            <element signature="e#10154#10155#0" expanded="true" />
+            <marker date="1533238473697" expanded="false" signature="2242:4113" ph="{...}" />
+            <marker date="1533238473697" expanded="true" signature="8600:9076" ph="{...}" />
           </folding>
         </state>
       </provider>

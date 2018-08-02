@@ -34,25 +34,25 @@ public class DefaultMap extends ObjectMap{
         objects = new ArrayList<GameObject>();
         mapSprites = new ArrayList<Sprite>();
 
-        WestBorder = new GameObject("West Wall", false, -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        WestBorder = new GameObject("West Wall - Default Map", false, -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"),WestBorder, glAutoDrawable);
             }
         });
 
-        EastBorder = new GameObject("East Wall", false, 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        EastBorder = new GameObject("East Wall - Default Map", false, 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"),EastBorder,glAutoDrawable);
             }
         });
 
-        NorthBorder = new GameObject("North Wall", false, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
+        NorthBorder = new GameObject("North Wall - Default Map", false, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"),NorthBorder,glAutoDrawable);
             }
         });
 
-        SouthBorder = new GameObject("South Wall", false, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
+        SouthBorder = new GameObject("South Wall - Default Map", false, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"),SouthBorder,glAutoDrawable);
             }
