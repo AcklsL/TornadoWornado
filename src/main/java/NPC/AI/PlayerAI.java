@@ -9,7 +9,7 @@ public class PlayerAI extends BaseAI {
 
     Sprite character;
     private static double fallSpeed = 0.01;
-    private static double moveSpeed = 0.05;
+    private static double moveSpeed = 0.025;
 
     public PlayerAI() {
     }

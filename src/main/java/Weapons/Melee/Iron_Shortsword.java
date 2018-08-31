@@ -22,7 +22,7 @@ public class Iron_Shortsword extends Melee{
 
     public Iron_Shortsword(Sprite holder) {
         pre_equip = holder.getRenderInstructions();
-        image = new HeldItem("Iron_Shortsword", holder, 0.055,0.055, new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"));
+        image = new HeldItem("Iron_Shortsword", holder, 0.055,0.055, new File("/Users/560372/OneDrive/TornadoWornado/src/main/java/Assets/nou.png"));
         holder.setItem(this);
         canSwing = true;
     }

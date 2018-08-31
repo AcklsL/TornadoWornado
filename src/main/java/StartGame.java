@@ -21,7 +21,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.security.Key;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -143,13 +143,13 @@ public class StartGame {
              */
             public void init(GLAutoDrawable glAutoDrawable) {
                 character = new Sprite("Character", 100, 0.0, 0.5, 0.125, 0.125,
-                        new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\nou.png"), new onHit() {
+                        new File("./src/main/java/Assets/nou.png"), new onHit() {
                     public void onHitAction(Weapon in) {
                         System.out.println(in.getHolder().getIdentifier() + " struck character for " + in.getDamage() + " damage with " + in.getName());
                     }
                 }, playerAI);
                 testSprite = new Sprite("testSprite", 100, -0.5, 0.0, 0.125, 0.125,
-                        new File("C:\\Users\\Duska\\Documents\\GitHub\\TornadoWornado\\src\\main\\java\\Assets\\bon.jpg"), new onHit() {
+                        new File("./src/main/java/Assets/nou.png"), new onHit() {
                     public void onHitAction(Weapon in) {
                         System.out.println(in.getHolder().getIdentifier() + " struck testSprite for " + in.getDamage() + " damage with " + in.getName());
                     }
@@ -238,7 +238,7 @@ public class StartGame {
 
         if (listener.containsKey(KeyEvent.VK_SPACE)) {
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (!character.isTouchingSouth(i) && i != character && canJump) {
+                if (canJump && !character.isTouchingSouth(i) && i != character) {
                     character.moveSpritePosBy(0.0,0.005);
                     timer.schedule(new TimerTask() {
                         @Override
