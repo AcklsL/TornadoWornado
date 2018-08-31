@@ -40,6 +40,7 @@ public class ObjectRenderer {
         images.add(image);
         if (image instanceof Sprite) {
             sprites.add((Sprite) image);
+            images.add(((Sprite) image).getHealthbar());
         }
         if (image instanceof HeldItem) {
             heldItems.add((HeldItem) image);

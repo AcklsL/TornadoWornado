@@ -11,7 +11,7 @@ public class HeldItem extends GameObject {
     Sprite holder;
 
     public HeldItem(String identity, final Sprite spriteHolder, final double xBound, final double yBound, final File image){
-        super(identity, false, spriteHolder.getxPos() + spriteHolder.getxBound(), spriteHolder.getyPos(), xBound, yBound, new GLInstruct() {
+        super(identity, true, spriteHolder.getxPos() + spriteHolder.getxBound(), spriteHolder.getyPos(), xBound, yBound, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) { }
         });
         holder = spriteHolder;

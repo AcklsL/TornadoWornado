@@ -2,6 +2,7 @@ package Utility;
 
 import NPC.AI.BaseAI;
 import Rendering.ObjectRenderer;
+import UI.Healthbar;
 import Weapons.Weapon;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureIO;
@@ -28,6 +29,7 @@ public class Sprite extends GameObject {
     private Weapon hasItem;
 
     private int health;
+    private Healthbar healthbar;
 
     public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in, BaseAI ai) {
         super(identity,false, x, y, w, h, new GLInstruct() {
@@ -47,6 +49,15 @@ public class Sprite extends GameObject {
         });
         charSprite = spriteImage;
         AI = ai;
+        healthbar = new Healthbar(this);
+    }
+
+    public Healthbar getHealthbar() {
+        return healthbar;
+    }
+
+    public void setHealthbar(Healthbar healthbar) {
+        this.healthbar = healthbar;
     }
 
     public BaseAI getAI() {

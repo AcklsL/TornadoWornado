@@ -1,5 +1,6 @@
 package Utility;
 
+import UI.Healthbar;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureIO;
 
@@ -56,5 +57,18 @@ public class QuickDraw {
             System.err.println("File not found for sprite: " + spriteImage.getName());
             System.exit(-1);
         }
+    }
+
+    /**
+     * Draws the health bar line.
+     * @param percent must be in decimal percentage. 0.5 for 50%
+     * @param glAutoDrawable default
+     */
+    public static void drawHealthLine(double percent, Sprite center, GLAutoDrawable glAutoDrawable) {
+        double xLength = center.getyBound() * percent;
+        final File greyBack = new File("./src/main/java/Assets/greyBar.png");
+        final File redFront = new File("./src/main/java/Assets/redBar.png");
+        QuickDraw.quickTexture(greyBack, center.getX(), center.getY() + center.getyBound() + 0.01, center.getxBound(), 0.02, glAutoDrawable);
+        QuickDraw.quickTexture(redFront, center.getX(), center.getY() + center.getyBound() + 0.01, xLength, 0.02, glAutoDrawable);
     }
 }
