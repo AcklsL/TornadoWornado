@@ -34,43 +34,43 @@ public class DefaultMap extends ObjectMap{
         objects = new ArrayList<GameObject>();
         mapSprites = new ArrayList<Sprite>();
 
-        WestBorder = new GameObject("West Wall - Default Map", false, -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        WestBorder = new GameObject("West Wall - Default Map", false, false, -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),WestBorder, glAutoDrawable);
             }
         });
 
-        EastBorder = new GameObject("East Wall - Default Map", false, 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        EastBorder = new GameObject("East Wall - Default Map", false,false, 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),EastBorder,glAutoDrawable);
             }
         });
 
-        NorthBorder = new GameObject("North Wall - Default Map", false, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
+        NorthBorder = new GameObject("North Wall - Default Map", false,false, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),NorthBorder,glAutoDrawable);
             }
         });
 
-        SouthBorder = new GameObject("South Wall - Default Map", false, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
+        SouthBorder = new GameObject("South Wall - Default Map", false,false, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),SouthBorder,glAutoDrawable);
             }
         });
 
-        PlatformA = new GameObject("Platform A - Default Map", false, 0.2, -0.6, 0.4, 0.2, new GLInstruct() {
+        PlatformA = new GameObject("Platform A - Default Map", false,false, 0.2, -0.6, 0.4, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"), PlatformA, glAutoDrawable);
             }
         });
 
-        PlatformB = new GameObject("Platform B - Default Map", false, 0.7, -0.4, 0.4, 0.3, new GLInstruct() {
+        PlatformB = new GameObject("Platform B - Default Map", false,false, 0.7, -0.4, 0.4, 0.3, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),PlatformB,glAutoDrawable);
             }
         });
 
-        PlatformC = new GameObject("Platform C - Default Map", false, -0.2, -0.8, 0.4, 0.2, new GLInstruct() {
+        PlatformC = new GameObject("Platform C - Default Map", false,false, -0.2, -0.8, 0.4, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 QuickDraw.quickTexture(new File("./src/main/java/Assets/bon.jpg"),PlatformC,glAutoDrawable);
             }

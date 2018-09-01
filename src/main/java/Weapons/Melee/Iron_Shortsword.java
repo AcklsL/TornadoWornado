@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class Iron_Shortsword extends Melee{
 
     private final int durability = 100;
-    private final int damage = 5;
+    private final int damage = -5;
     private final int swingSpeed = 500;
     private boolean canSwing;
     private HeldItem image; //PLACEHOLDER IMAGE

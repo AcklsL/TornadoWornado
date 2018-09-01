@@ -2,6 +2,7 @@ package Rendering;
 
 import Maps.Layer;
 import Maps.ObjectMap;
+import UI.Healthbar;
 import Utility.GLInstruct;
 import Utility.GameObject;
 import Utility.HeldItem;
@@ -27,6 +28,7 @@ public class ObjectRenderer {
     private static ArrayList<GameObject> images;
     private static ArrayList<Sprite> sprites;
     private static ArrayList<HeldItem> heldItems;
+    private static ArrayList<Healthbar> healthbars;
 
     private GLInstruct instruct;
 
@@ -34,6 +36,7 @@ public class ObjectRenderer {
         images = new ArrayList<GameObject>();
         sprites = new ArrayList<Sprite>();
         heldItems = new ArrayList<HeldItem>();
+        healthbars = new ArrayList<Healthbar>();
     }
 
     public void addObjectToScreen(GameObject image) {
@@ -41,6 +44,7 @@ public class ObjectRenderer {
         if (image instanceof Sprite) {
             sprites.add((Sprite) image);
             images.add(((Sprite) image).getHealthbar());
+            healthbars.add(((Sprite) image).getHealthbar());
         }
         if (image instanceof HeldItem) {
             heldItems.add((HeldItem) image);

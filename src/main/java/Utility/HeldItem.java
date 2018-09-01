@@ -11,7 +11,7 @@ public class HeldItem extends GameObject {
     Sprite holder;
 
     public HeldItem(String identity, final Sprite spriteHolder, final double xBound, final double yBound, final File image){
-        super(identity, true, spriteHolder.getxPos() + spriteHolder.getxBound(), spriteHolder.getyPos(), xBound, yBound, new GLInstruct() {
+        super(identity, false, true, spriteHolder.getxPos() + spriteHolder.getxBound(), spriteHolder.getyPos(), xBound, yBound, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) { }
         });
         holder = spriteHolder;
@@ -23,20 +23,12 @@ public class HeldItem extends GameObject {
     }
 
     public void swing(Weapon in) {
-        System.out.println("Swing!");
         for (Sprite i : ObjectRenderer.getSprites()) {
-            if (i != holder && isTouching(i)) {
+            if (i != holder && this.isTouching(holder,i)) {
                 i.changeHealth(in.getDamage());
+                i.getHealthbar().setPercent((double) i.getHealth() / (double) i.getMaxHealth());
                 i.getOnHit().onHitAction(in);
             }
-        }
-    }
-
-    public boolean isTouching(GameObject in) {
-        if (this.isTouchingEast(in) || this.isTouchingNorth(in) || this.isTouchingSouth(in) || this.isTouchingWest(in)) {
-            return true;
-        } else {
-            return false;
         }
     }
 

@@ -65,10 +65,11 @@ public class QuickDraw {
      * @param glAutoDrawable default
      */
     public static void drawHealthLine(double percent, Sprite center, GLAutoDrawable glAutoDrawable) {
+        //System.out.println(percent);
         double xLength = center.getyBound() * percent;
         final File greyBack = new File("./src/main/java/Assets/greyBar.png");
-        final File redFront = new File("./src/main/java/Assets/redBar.png");
-        QuickDraw.quickTexture(greyBack, center.getX(), center.getY() + center.getyBound() + 0.01, center.getxBound(), 0.02, glAutoDrawable);
+        final File redFront = new File("./src/main/java/Assets/nou.png");
+        //QuickDraw.quickTexture(greyBack, center.getX(), center.getY() + center.getyBound() + 0.01, center.getxBound(), 0.02, glAutoDrawable);
         QuickDraw.quickTexture(redFront, center.getX(), center.getY() + center.getyBound() + 0.01, xLength, 0.02, glAutoDrawable);
     }
 }

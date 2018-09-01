@@ -30,7 +30,7 @@ public class PlayerAI extends BaseAI {
         try {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !i.isBackground()) {
+                if (i != character && !i.isIgnore()) {
                     if (character.isTouchingEast(i) && !character.isTouchingNorth(i)) {
                         move = false;
                     }
@@ -56,7 +56,7 @@ public class PlayerAI extends BaseAI {
         try {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !i.isBackground()) {
+                if (i != character && !i.isIgnore()) {
                     if (character.isTouchingWest(i) && !character.isTouchingNorth(i)) {
                         move = false;
                     }

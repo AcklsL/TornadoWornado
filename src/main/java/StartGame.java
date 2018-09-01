@@ -3,6 +3,7 @@ import Maps.DefaultMap;
 import Maps.ObjectMap;
 import NPC.AI.BaseAI;
 import NPC.AI.BasicMeleeAI;
+import NPC.AI.NoAI;
 import NPC.AI.PlayerAI;
 import Rendering.ObjectRenderer;
 import Utility.GameObject;
@@ -239,7 +240,7 @@ public class StartGame {
         if (listener.containsKey(KeyEvent.VK_SPACE)) {
             for (GameObject i : ObjectRenderer.getImages()) {
                 if (canJump && !character.isTouchingSouth(i) && i != character) {
-                    character.moveSpritePosBy(0.0,0.005);
+                    character.moveSpritePosBy(0.0,0.0025);
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {

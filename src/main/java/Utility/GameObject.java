@@ -14,21 +14,31 @@ public class GameObject {
     private double yBound;
     private GLInstruct render;
     private boolean isBackground;
+    private boolean ignore;
 
     private final double boundTolerance = 0.005; // MUST BE LESS THAN 0.1! Otherwise things get janky.
 
-    public GameObject(String identity, boolean background, double xPos, double yPos, double xBound, double yBound, final GLInstruct objectRender) {
+    public GameObject(String identity, boolean background, boolean ignoreCheck, double xPos, double yPos, double xBound, double yBound, final GLInstruct objectRender) {
         identifier = identity;
         x = xPos;
         y = yPos;
         this.xBound = xBound;
         this.yBound = yBound;
+        ignore = ignoreCheck;
         render = new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 objectRender.instruct(glAutoDrawable);
             }
         };
         isBackground = background;
+    }
+
+    public boolean isIgnore() {
+        return ignore;
+    }
+
+    public void setIgnore(boolean ignore) {
+        this.ignore = ignore;
     }
 
     public boolean isBackground() {
@@ -116,5 +126,13 @@ public class GameObject {
     public boolean isTouchingNorth(GameObject target) {
         double half = target.y + (target.yBound/2);
         return (target.getY() >= -1.0) && ((Math.abs((y) - (target.y + target.yBound))) < boundTolerance) && (x + xBound >= target.x) && (x <= target.x + target.xBound) && (y >= half);
+    }
+
+    public boolean isTouching(GameObject from, GameObject to) {
+        if (from.isTouchingEast(to) || from.isTouchingNorth(to) || from.isTouchingSouth(to) || from.isTouchingWest(to)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

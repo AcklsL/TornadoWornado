@@ -1,6 +1,7 @@
 package Utility;
 
 import NPC.AI.BaseAI;
+import NPC.AI.NoAI;
 import Rendering.ObjectRenderer;
 import UI.Healthbar;
 import Weapons.Weapon;
@@ -29,10 +30,11 @@ public class Sprite extends GameObject {
     private Weapon hasItem;
 
     private int health;
+    private int maxHealth;
     private Healthbar healthbar;
 
     public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in, BaseAI ai) {
-        super(identity,false, x, y, w, h, new GLInstruct() {
+        super(identity,false, false, x, y, w, h, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) { }
         });
         xPos = x;
@@ -40,6 +42,7 @@ public class Sprite extends GameObject {
         width = w;
         height = h;
         this.health = health;
+        maxHealth = health;
         onHit = in;
         hasItem = null;
         super.setRenderInstructions(new GLInstruct() {
@@ -50,6 +53,10 @@ public class Sprite extends GameObject {
         charSprite = spriteImage;
         AI = ai;
         healthbar = new Healthbar(this);
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 
     public Healthbar getHealthbar() {
@@ -96,6 +103,16 @@ public class Sprite extends GameObject {
 
     public void changeHealth(int dmg) {
         this.health += dmg;
+        if (health <= 0) {
+            super.setBackground(true);
+            super.setIgnore(true);
+            super.setRenderInstructions(new GLInstruct() {
+                public void instruct(GLAutoDrawable glAutoDrawable) { }
+            });
+            getHealthbar().clear();
+            setHealthbar(new Healthbar());
+            setAI(new NoAI());
+        }
     }
 
     public void moveSpritePosTo(double x, double y) {
