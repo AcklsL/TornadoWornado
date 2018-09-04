@@ -10,8 +10,8 @@ public class MouseEvents implements MouseListener {
     private boolean RMB;
     private boolean MMB;
 
-    private int mouseX;
-    private int mouseY;
+    private static int mouseX;
+    private static int mouseY;
 
     public MouseEvents() {
         LMB = false;
@@ -75,11 +75,11 @@ public class MouseEvents implements MouseListener {
         return MMB;
     }
 
-    public int getMouseX() {
+    public static int getMouseX() {
         return mouseX;
     }
 
-    public int getMouseY() {
+    public static int getMouseY() {
         return mouseY;
     }
 }

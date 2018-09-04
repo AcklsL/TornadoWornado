@@ -3,6 +3,7 @@ package Rendering;
 import Maps.Layer;
 import Maps.ObjectMap;
 import UI.Healthbar;
+import UI.Overlay;
 import Utility.GLInstruct;
 import Utility.GameObject;
 import Utility.HeldItem;
@@ -29,6 +30,7 @@ public class ObjectRenderer {
     private static ArrayList<Sprite> sprites;
     private static ArrayList<HeldItem> heldItems;
     private static ArrayList<Healthbar> healthbars;
+    private static ArrayList<Overlay> overlays;
 
     private GLInstruct instruct;
 
@@ -37,9 +39,14 @@ public class ObjectRenderer {
         sprites = new ArrayList<Sprite>();
         heldItems = new ArrayList<HeldItem>();
         healthbars = new ArrayList<Healthbar>();
+        overlays = new ArrayList<Overlay>();
     }
 
-    public void addObjectToScreen(GameObject image) {
+    public static void addOverlay(Overlay in) {
+        overlays.add(in);
+    }
+
+    public static void addObjectToScreen(GameObject image) {
         images.add(image);
         if (image instanceof Sprite) {
             sprites.add((Sprite) image);
@@ -51,7 +58,7 @@ public class ObjectRenderer {
         }
     }
 
-    public void addMapToScreen(ObjectMap in) {
+    public static void addMapToScreen(ObjectMap in) {
         for (GameObject object : in.getMap()) {
             addObjectToScreen(object);
         }
@@ -95,11 +102,14 @@ public class ObjectRenderer {
      * Run only AFTER adding all images req. to screen.
      */
     public void createInstruct() {
-        if (!images.isEmpty()) {
+        if (!images.isEmpty() && !overlays.isEmpty()) {
             instruct = new GLInstruct() {
                 public void instruct(GLAutoDrawable glAutoDrawable) {
                     for (GameObject i : images) {
                         i.getRenderInstructions().instruct(glAutoDrawable);
+                    }
+                    for (Overlay i : overlays) {
+                        i.getInstruct().instruct(glAutoDrawable);
                     }
                 }
             };

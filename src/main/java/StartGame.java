@@ -1,13 +1,13 @@
 import KeyBinds.*;
 import Maps.DefaultMap;
 import Maps.ObjectMap;
-import NPC.AI.BaseAI;
 import NPC.AI.BasicMeleeAI;
-import NPC.AI.NoAI;
 import NPC.AI.PlayerAI;
 import Rendering.ObjectRenderer;
+import UI.CharacterStatusBar;
+import UI.Overlay;
+import Utility.GLInstruct;
 import Utility.GameObject;
-import Utility.HeldItem;
 import Utility.Sprite;
 import Utility.onHit;
 import Weapons.Melee.Iron_Shortsword;
@@ -22,7 +22,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,6 +49,8 @@ public class StartGame {
     private static Sprite testSprite;
     private static PlayerAI playerAI;
     private static ObjectMap currentMap;
+
+    private static CharacterStatusBar statusBar;
 
     private static ArrayList<Integer> keys;
 
@@ -144,7 +145,7 @@ public class StartGame {
              */
             public void init(GLAutoDrawable glAutoDrawable) {
                 character = new Sprite("Character", 100, 0.0, 0.5, 0.125, 0.125,
-                        new File("./src/main/java/Assets/nou.png"), new onHit() {
+                        new File("./src/main/java/Assets/bon.jpg"), new onHit() {
                     public void onHitAction(Weapon in) {
                         System.out.println(in.getHolder().getIdentifier() + " struck character for " + in.getDamage() + " damage with " + in.getName());
                     }
@@ -159,10 +160,12 @@ public class StartGame {
                 testSprite.getAI().supplySprite(testSprite);
                 test = new Iron_Shortsword(character);
                 currentMap = new DefaultMap();
-                renderer.addObjectToScreen(character);
-                renderer.addObjectToScreen(testSprite);
-                renderer.addObjectToScreen(test.getImage());
-                renderer.addMapToScreen(currentMap);
+                ObjectRenderer.addObjectToScreen(character);
+                ObjectRenderer.addObjectToScreen(testSprite);
+                ObjectRenderer.addObjectToScreen(test.getImage());
+                ObjectRenderer.addMapToScreen(currentMap);
+                statusBar = new CharacterStatusBar();
+                ObjectRenderer.addOverlay(statusBar);
                 renderer.createInstruct();
             }
 
@@ -170,22 +173,28 @@ public class StartGame {
              * Ran at close of program
              */
             public void dispose(GLAutoDrawable glAutoDrawable) {
+                renderer.setInstruct(new GLInstruct() {
+                    public void instruct(GLAutoDrawable glAutoDrawable) {
 
+                    }
+                });
             }
 
             /**
              * Ran at beginning and also when it is repainted.
              */
             public void display(GLAutoDrawable glAutoDrawable) {
-                GL2 gl = glAutoDrawable.getGL().getGL2();
-                gl.glLoadIdentity();
-                gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+                GL2 gl = glAutoDrawable.getGL().getGL2(); //Intiator
+                gl.glLoadIdentity(); //Reset screen.
+                gl.glClear(GL2.GL_COLOR_BUFFER_BIT); //Reset screen.
                 if (keys != null) keyTest();
                 physics();
                 for (Sprite i : ObjectRenderer.getSprites()) {
-                    i.getAI().nextMove();
+                    i.getAI().nextMove(); //See BaseAI
                 }
                 renderer.getInstruct().instruct(glAutoDrawable);
+                character.changeHealth(0.05);
+                character.changeMana(0.08);
             }
 
             /**
@@ -196,37 +205,44 @@ public class StartGame {
             }
         });
 
+        //Required items. don't do this then program = screwed.
         animator.start();
         frame.setVisible(true);
     }
 
+    /**
+     * Method run at every frame to test for key input.
+     * Used only for character and player-based actions.
+     */
     private static void keyTest() {
-        mouseListener.refreshMouseLocation();
+        //not gonna explain mouseListener. its obvious
         if (mouseListener.isLMB()) {
-            System.out.println("LMB");
+            mouseListener.refreshMouseLocation();
             if (character.holdingItem()) {
                 character.getItem().onLeftClick();
             }
         }
 
         if (mouseListener.isMMB()) {
-            System.out.println("MMB");
+            mouseListener.refreshMouseLocation();
             if (character.holdingItem()) {
                 character.getItem().onMiddleClick();
             }
         }
 
         if (mouseListener.isRMB()) {
-            System.out.println("RMB");
+            mouseListener.refreshMouseLocation();
             if (character.holdingItem()) {
                 character.getItem().onRightClick();
             }
+            character.changeHealth(-1);
         }
 
         //if (listener.containsKey(KeyEvent.VK_W)) { }
 
         if (listener.containsKey(KeyEvent.VK_A)) {
             character.getAI().onLeftMovement();
+            character.flip(true);
         }
 
         if (listener.containsKey(KeyEvent.VK_S)) {
@@ -235,53 +251,69 @@ public class StartGame {
 
         if (listener.containsKey(KeyEvent.VK_D)) {
             character.getAI().onRightMovement();
+            character.flip(false);
         }
 
-        if (listener.containsKey(KeyEvent.VK_SPACE)) {
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (canJump && !character.isTouchingSouth(i) && i != character) {
-                    character.moveSpritePosBy(0.0,0.0025);
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            canJump = false;
-                        }
-                    }, 250);
-                }
-            }
-        }
-
+        //Ensures that you can't jump into something from the bottom.
         for (GameObject i : ObjectRenderer.getImages()) {
-            if (i != character && character.isTouchingSouth(i)) {
+            if (i != character && !(i instanceof Sprite)
+                    && (character.isTouchingSouth(i) && !(character.isTouchingEast(i) || character.isTouchingWest(i)))) {
                 canJump = false;
                 break;
             }
         }
+
+        //Does the jump action.
+        if (listener.containsKey(KeyEvent.VK_SPACE)) {
+            if (canJump) {
+                character.moveSpritePosBy(0.0,0.025);
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        canJump = false;
+                    }
+                }, 300);
+            }
+        }
+
+
     }
 
+    /**
+     * The physics method run every frame.
+     * Affects ALL SPRITES!
+     */
     private static void physics() {
-        ArrayList<Sprite> toFall = new ArrayList<Sprite>();
+        ArrayList<Sprite> toFall = new ArrayList<Sprite>(); //List of sprites that will fall.
         for (Sprite sprite : ObjectRenderer.getSprites()) {
-            toFall.add(sprite);
+            toFall.add(sprite); //Adds all the sprites to above list.
             for (GameObject object : ObjectRenderer.getImages()) {
-                if (sprite != object && !(object instanceof HeldItem)) {
-                    if (sprite.isTouchingNorth(object)) {
+                if (sprite != object && !object.isIgnore()) { //This line prevents self-checking. See Objectrenderer for more info
+                    if (sprite.isTouchingNorth(object)) { //If it is touching the north side of an object
                         toFall.remove(sprite);
-                        canJump = true;
+                        if (sprite == character) {
+                            canJump = true;
+                        }
                         break;
-                    } else if (!(sprite.getyPos() > -1.0)) {
+                    } else if (!(sprite.getyPos() > -1.0)) { //If it is on the bottom of the screen.
                         toFall.remove(sprite);
-                        canJump = true;
+                        if (sprite == character) {
+                            canJump = true;
+                        }
                         break;
                     }
                 }
             }
         }
         for (Sprite sprite : toFall) {
-            sprite.moveSpritePosBy(0.0, -0.01);
+            sprite.moveSpritePosBy(0.0, -0.01); //The actual falling of the sprite.
         }
     }
 
+    /**
+     * Returns the character sprite
+     * @return Sprite
+     */
     public static Sprite getCharacter() {
          return character;
     }

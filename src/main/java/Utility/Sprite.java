@@ -26,11 +26,15 @@ public class Sprite extends GameObject {
     private double width;
     private onHit onHit;
     private BaseAI AI;
+    private boolean flip;
+
+    private double mana;
+    private final double maxMana = 100.0;
 
     private Weapon hasItem;
 
-    private int health;
-    private int maxHealth;
+    private double health;
+    private double maxHealth;
     private Healthbar healthbar;
 
     public Sprite(String identity,int health, final double x, final double y, final double w, final double h, final File spriteImage, onHit in, BaseAI ai) {
@@ -45,17 +49,69 @@ public class Sprite extends GameObject {
         maxHealth = health;
         onHit = in;
         hasItem = null;
+        flip = false;
+        mana = 100;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(charSprite, xPos, yPos, width, height, glAutoDrawable);
+                QuickDraw.quickTexture(charSprite,flip, xPos, yPos, width, height, glAutoDrawable);
             }
         });
         charSprite = spriteImage;
         AI = ai;
-        healthbar = new Healthbar(this);
+        if (!identity.equalsIgnoreCase("Character")) {
+            healthbar = new Healthbar(this);
+        } else {
+            healthbar = new Healthbar();
+        }
     }
 
-    public int getMaxHealth() {
+    public boolean changeMana(double in) {
+        if (mana <= 0) {
+            return false;
+        } else {
+            if (in > 0) {
+                if (mana < maxMana) {
+                    mana += in;
+                } else {
+                    return false;
+                }
+            } else {
+                if (mana >= 0) {
+                    mana += in;
+                }
+            }
+            return true;
+        }
+    }
+
+    public double getMana() {
+        return mana;
+    }
+
+    public double getMaxMana() {
+        return maxMana;
+    }
+
+    public void flip(boolean in) {
+        flip = in;
+        if (flip) {
+            hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
+                public void instruct(GLAutoDrawable glAutoDrawable) {
+                    QuickDraw.quickTexture(hasItem.getHeldItem().getImg(), flip, xPos - hasItem.getHeldItem().getW(), yPos,
+                            hasItem.getHeldItem().getW(), hasItem.getHeldItem().getH(), glAutoDrawable);
+                }
+            });
+        } else {
+            hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
+                public void instruct(GLAutoDrawable glAutoDrawable) {
+                    QuickDraw.quickTexture(hasItem.getHeldItem().getImg(), flip, xPos + width, yPos,
+                            hasItem.getHeldItem().getW(), hasItem.getHeldItem().getH(), glAutoDrawable);
+                }
+            });
+        }
+    }
+
+    public double getMaxHealth() {
         return maxHealth;
     }
 
@@ -89,7 +145,7 @@ public class Sprite extends GameObject {
         yPos += y;
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
@@ -101,17 +157,29 @@ public class Sprite extends GameObject {
         this.health = health;
     }
 
-    public void changeHealth(int dmg) {
-        this.health += dmg;
-        if (health <= 0) {
-            super.setBackground(true);
-            super.setIgnore(true);
-            super.setRenderInstructions(new GLInstruct() {
-                public void instruct(GLAutoDrawable glAutoDrawable) { }
-            });
-            getHealthbar().clear();
-            setHealthbar(new Healthbar());
-            setAI(new NoAI());
+    public void changeHealth(double dmg) {
+        if (dmg > 0) {
+            if (health < maxHealth) {
+                health += dmg;
+            }
+        } else {
+            if (health <= 0) {
+                super.setBackground(true);
+                super.setIgnore(true);
+                super.setRenderInstructions(new GLInstruct() {
+                    public void instruct(GLAutoDrawable glAutoDrawable) { }
+                });
+                getHealthbar().clear();
+                setHealthbar(new Healthbar());
+                setAI(new NoAI());
+                hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
+                    public void instruct(GLAutoDrawable glAutoDrawable) { }});
+                ObjectRenderer.getSprites().remove(this);
+                ObjectRenderer.getImages().remove(this);
+                ObjectRenderer.getImages().remove(hasItem.getHeldItem());
+            } else {
+                this.health += dmg;
+            }
         }
     }
 
