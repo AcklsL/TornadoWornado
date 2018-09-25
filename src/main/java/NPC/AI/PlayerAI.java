@@ -1,9 +1,9 @@
 package NPC.AI;
 
 import Rendering.ObjectRenderer;
-import Utility.GameObject;
-import Utility.HeldItem;
-import Utility.Sprite;
+import Rendering.GameObject;
+import Rendering.Projectile;
+import Rendering.Sprite;
 
 public class PlayerAI extends BaseAI {
 
@@ -30,9 +30,10 @@ public class PlayerAI extends BaseAI {
         try {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !i.isIgnore()) {
+                if (!i.isIgnore() && i != character && !(i instanceof Projectile)) {
                     if (character.isTouchingEast(i) && !character.isTouchingNorth(i)) {
                         move = false;
+                        break;
                     }
                 }
             }
@@ -56,9 +57,10 @@ public class PlayerAI extends BaseAI {
         try {
             boolean move = true;
             for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != character && !i.isIgnore()) {
+                if (!i.isIgnore() && i != character && !(i instanceof Projectile)) {
                     if (character.isTouchingWest(i) && !character.isTouchingNorth(i)) {
                         move = false;
+                        break;
                     }
                 }
             }

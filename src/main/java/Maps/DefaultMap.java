@@ -1,16 +1,12 @@
 package Maps;
 
 import Utility.GLInstruct;
-import Utility.GameObject;
+import Rendering.GameObject;
 import Utility.QuickDraw;
-import Utility.Sprite;
-import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureIO;
+import Rendering.Sprite;
 
-import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DefaultMap extends ObjectMap{

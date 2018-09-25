@@ -1,7 +1,7 @@
 package Weapons;
 
-import Utility.HeldItem;
-import Utility.Sprite;
+import Rendering.HeldItem;
+import Rendering.Sprite;
 
 public interface Weapon {
 

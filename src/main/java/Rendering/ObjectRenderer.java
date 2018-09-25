@@ -1,19 +1,12 @@
 package Rendering;
 
-import Maps.Layer;
 import Maps.ObjectMap;
 import UI.Healthbar;
 import UI.Overlay;
 import Utility.GLInstruct;
-import Utility.GameObject;
-import Utility.HeldItem;
-import Utility.Sprite;
 
 import javax.imageio.ImageIO;
-import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.awt.GLCanvas;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +24,8 @@ public class ObjectRenderer {
     private static ArrayList<HeldItem> heldItems;
     private static ArrayList<Healthbar> healthbars;
     private static ArrayList<Overlay> overlays;
+    private static ArrayList<Projectile> projectiles;
+    private static ArrayList<GameObject> toPurge;
 
     private GLInstruct instruct;
 
@@ -40,6 +35,8 @@ public class ObjectRenderer {
         heldItems = new ArrayList<HeldItem>();
         healthbars = new ArrayList<Healthbar>();
         overlays = new ArrayList<Overlay>();
+        projectiles = new ArrayList<Projectile>();
+        toPurge = new ArrayList<GameObject>();
     }
 
     public static void addOverlay(Overlay in) {
@@ -52,6 +49,9 @@ public class ObjectRenderer {
             sprites.add((Sprite) image);
             images.add(((Sprite) image).getHealthbar());
             healthbars.add(((Sprite) image).getHealthbar());
+        }
+        if (image instanceof Projectile) {
+            projectiles.add((Projectile) image);
         }
         if (image instanceof HeldItem) {
             heldItems.add((HeldItem) image);
@@ -78,6 +78,23 @@ public class ObjectRenderer {
         return null;
     }
 
+    public static void purge(GameObject in) {
+        toPurge.add(in);
+    }
+
+    public static void filter() {
+        for (GameObject i : toPurge) {
+            images.remove(i);
+            if (i instanceof Sprite) {
+                sprites.remove(i);
+            } else if (i instanceof HeldItem) {
+                heldItems.remove(i);
+            } else if (i instanceof Projectile) {
+                projectiles.remove(i);
+            }
+        }
+    }
+
     public GLInstruct getInstruct() {
         return instruct;
     }
@@ -97,6 +114,8 @@ public class ObjectRenderer {
     public static ArrayList<HeldItem> getHeldItems() {
         return heldItems;
     }
+
+    public static ArrayList<Projectile> getProjectiles() {return projectiles;}
 
     /**
      * Run only AFTER adding all images req. to screen.

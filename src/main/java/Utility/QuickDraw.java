@@ -1,14 +1,13 @@
 package Utility;
 
-import com.jogamp.opengl.util.awt.ImageUtil;
+import Rendering.GameObject;
+import Rendering.Sprite;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureCoords;
 import com.jogamp.opengl.util.texture.TextureIO;
 
-import javax.imageio.ImageIO;
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 

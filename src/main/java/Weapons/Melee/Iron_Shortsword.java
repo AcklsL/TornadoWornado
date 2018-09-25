@@ -1,10 +1,12 @@
 package Weapons.Melee;
 
+import Abilities.AbilityBase;
+import Rendering.ObjectRenderer;
+import Rendering.Projectile;
 import Utility.GLInstruct;
-import Utility.HeldItem;
-import Utility.Sprite;
+import Rendering.HeldItem;
+import Rendering.Sprite;
 
-import javax.media.opengl.GLAutoDrawable;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -82,7 +84,11 @@ public class Iron_Shortsword extends Melee{
     }
 
     public void onRightClick() {
-
+        Sprite character = image.getHolder();
+        if (character.getMana() > 0) {
+            ObjectRenderer.addObjectToScreen(Projectile.genProjectile("Apple", new File(AbilityBase.strPthToAbilityImages() + "QTestAbility.jpg"), character));
+            character.changeMana(-0.5);
+        }
     }
 
     public void onMiddleClick() {

@@ -1,4 +1,4 @@
-package Utility;
+package Rendering;
 
 import Utility.GLInstruct;
 
@@ -114,7 +114,7 @@ public class GameObject {
 
     public boolean isTouchingEast(GameObject target) {
         double half = target.x + (target.xBound/2);
-        return (target.getX() + target.getyBound() >= -1.0) && ((target.x + target.xBound) >= x) && (y + yBound > target.y) && (target.y + target.yBound > y) && (x >= half);
+        return (target.getX() + target.getxBound() >= -1.0) && ((target.x + target.xBound) >= x) && (y + yBound > target.y) && (target.y + target.yBound > y) && (x >= half);
     }
 
     public boolean isTouchingSouth(GameObject target) {
@@ -128,8 +128,16 @@ public class GameObject {
         return (target.getY() >= -1.0) && ((Math.abs((y) - (target.y + target.yBound))) < boundTolerance) && (x + xBound >= target.x) && (x <= target.x + target.xBound) && (y >= half);
     }
 
-    public boolean isTouching(GameObject from, GameObject to) {
-        if (from.isTouchingEast(to) || from.isTouchingNorth(to) || from.isTouchingSouth(to) || from.isTouchingWest(to)) {
+    public boolean isTouching(GameObject to) {
+        if (isTouchingNorth(to) || isTouchingSouth(to) || isTouchingEast(to) || isTouchingWest(to)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean onScreen() {
+        if (x + xBound <= 1.0 && x >= -1.0 && y + yBound <= 1.0 && y >= -1.0) {
             return true;
         } else {
             return false;

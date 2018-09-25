@@ -1,6 +1,6 @@
 package NPC.AI;
 
-import Utility.Sprite;
+import Rendering.Sprite;
 
 public class NoAI extends BaseAI {
     public void nextMove() {

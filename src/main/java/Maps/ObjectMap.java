@@ -1,7 +1,7 @@
 package Maps;
 
-import Utility.GameObject;
-import Utility.Sprite;
+import Rendering.GameObject;
+import Rendering.Sprite;
 
 import java.util.ArrayList;
 

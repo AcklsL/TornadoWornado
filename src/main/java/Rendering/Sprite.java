@@ -1,21 +1,17 @@
-package Utility;
+package Rendering;
 
 import NPC.AI.BaseAI;
 import NPC.AI.NoAI;
+import Rendering.GameObject;
 import Rendering.ObjectRenderer;
 import UI.Healthbar;
+import Utility.GLInstruct;
+import Utility.QuickDraw;
+import Utility.onHit;
 import Weapons.Weapon;
-import com.jogamp.opengl.util.texture.Texture;
-import com.jogamp.opengl.util.texture.TextureIO;
 
-import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.awt.GLCanvas;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Sprite extends GameObject {
 
@@ -24,7 +20,7 @@ public class Sprite extends GameObject {
     private double yPos;
     private double height;
     private double width;
-    private onHit onHit;
+    private Utility.onHit onHit;
     private BaseAI AI;
     private boolean flip;
 
@@ -67,7 +63,22 @@ public class Sprite extends GameObject {
 
     public boolean changeMana(double in) {
         if (mana <= 0) {
-            return false;
+            if (in < 0) {
+                return false;
+            } else {
+                if (in > 0) {
+                    if (mana < maxMana) {
+                        mana += in;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    if (mana >= 0) {
+                        mana += in;
+                    }
+                }
+                return true;
+            }
         } else {
             if (in > 0) {
                 if (mana < maxMana) {
@@ -172,11 +183,8 @@ public class Sprite extends GameObject {
                 getHealthbar().clear();
                 setHealthbar(new Healthbar());
                 setAI(new NoAI());
-                hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
-                    public void instruct(GLAutoDrawable glAutoDrawable) { }});
-                ObjectRenderer.getSprites().remove(this);
-                ObjectRenderer.getImages().remove(this);
-                ObjectRenderer.getImages().remove(hasItem.getHeldItem());
+                ObjectRenderer.purge(this);
+                if (hasItem != null) ObjectRenderer.purge(hasItem.getHeldItem());
             } else {
                 this.health += dmg;
             }

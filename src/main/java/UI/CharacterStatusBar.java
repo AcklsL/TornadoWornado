@@ -3,7 +3,7 @@ package UI;
 import Rendering.ObjectRenderer;
 import Utility.GLInstruct;
 import Utility.QuickDraw;
-import Utility.Sprite;
+import Rendering.Sprite;
 
 import javax.media.opengl.GLAutoDrawable;
 import java.io.File;

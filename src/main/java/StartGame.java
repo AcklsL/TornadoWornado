@@ -1,14 +1,15 @@
+import Abilities.AbilityBase;
 import KeyBinds.*;
 import Maps.DefaultMap;
 import Maps.ObjectMap;
 import NPC.AI.BasicMeleeAI;
 import NPC.AI.PlayerAI;
 import Rendering.ObjectRenderer;
+import Rendering.Projectile;
 import UI.CharacterStatusBar;
-import UI.Overlay;
 import Utility.GLInstruct;
-import Utility.GameObject;
-import Utility.Sprite;
+import Rendering.GameObject;
+import Rendering.Sprite;
 import Utility.onHit;
 import Weapons.Melee.Iron_Shortsword;
 import Weapons.Weapon;
@@ -98,6 +99,14 @@ public class StartGame {
             listener.getInputMap().put(KeyStroke.getKeyStroke(' '), "Space key");
             listener.getActionMap().put("Space key", new SpaceKey(keys));
 
+            //Q key
+            listener.getInputMap().put(KeyStroke.getKeyStroke('q'), "Q key");
+            listener.getActionMap().put("Q key", new QKey(keys));
+
+            //E key
+            listener.getInputMap().put(KeyStroke.getKeyStroke('e'), "E key");
+            listener.getActionMap().put("E key", new EKey(keys));
+
             //W key released
             listener.getInputMap().put(KeyStroke.getKeyStroke("released W"), "W key release");
             listener.getActionMap().put("W key release", new WKeyR(keys));
@@ -117,6 +126,14 @@ public class StartGame {
             //Space key released
             listener.getInputMap().put(KeyStroke.getKeyStroke("released SPACE"), "Space key release");
             listener.getActionMap().put("Space key release", new SpaceKeyR(keys));
+
+            //Q key released
+            listener.getInputMap().put(KeyStroke.getKeyStroke("released Q"), "Q key release");
+            listener.getActionMap().put("Q key release", new QKeyR(keys));
+
+            //E key released
+            listener.getInputMap().put(KeyStroke.getKeyStroke("released E"), "E key release");
+            listener.getActionMap().put("E key release", new EKeyR(keys));
         }
 
         canvas.setFocusable(false);
@@ -187,11 +204,15 @@ public class StartGame {
                 GL2 gl = glAutoDrawable.getGL().getGL2(); //Intiator
                 gl.glLoadIdentity(); //Reset screen.
                 gl.glClear(GL2.GL_COLOR_BUFFER_BIT); //Reset screen.
-                if (keys != null) keyTest();
+                if (keys != null && !keys.isEmpty()) keyTest();
                 physics();
                 for (Sprite i : ObjectRenderer.getSprites()) {
                     i.getAI().nextMove(); //See BaseAI
                 }
+                for (Projectile i : ObjectRenderer.getProjectiles()) {
+                    i.move();
+                }
+                ObjectRenderer.filter();
                 renderer.getInstruct().instruct(glAutoDrawable);
                 character.changeHealth(0.05);
                 character.changeMana(0.08);
@@ -235,7 +256,6 @@ public class StartGame {
             if (character.holdingItem()) {
                 character.getItem().onRightClick();
             }
-            character.changeHealth(-1);
         }
 
         //if (listener.containsKey(KeyEvent.VK_W)) { }
@@ -256,7 +276,7 @@ public class StartGame {
 
         //Ensures that you can't jump into something from the bottom.
         for (GameObject i : ObjectRenderer.getImages()) {
-            if (i != character && !(i instanceof Sprite)
+            if (i != character && !(i instanceof Sprite) && !(i instanceof Projectile)
                     && (character.isTouchingSouth(i) && !(character.isTouchingEast(i) || character.isTouchingWest(i)))) {
                 canJump = false;
                 break;
@@ -266,7 +286,7 @@ public class StartGame {
         //Does the jump action.
         if (listener.containsKey(KeyEvent.VK_SPACE)) {
             if (canJump) {
-                character.moveSpritePosBy(0.0,0.025);
+                character.moveSpritePosBy(0.0,0.03);
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -288,7 +308,7 @@ public class StartGame {
         for (Sprite sprite : ObjectRenderer.getSprites()) {
             toFall.add(sprite); //Adds all the sprites to above list.
             for (GameObject object : ObjectRenderer.getImages()) {
-                if (sprite != object && !object.isIgnore()) { //This line prevents self-checking. See Objectrenderer for more info
+                if (sprite != object && !object.isIgnore() && !(object instanceof Projectile)) { //This line prevents self-checking. See Objectrenderer for more info
                     if (sprite.isTouchingNorth(object)) { //If it is touching the north side of an object
                         toFall.remove(sprite);
                         if (sprite == character) {

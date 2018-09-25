@@ -1,9 +1,9 @@
 package UI;
 
 import Utility.GLInstruct;
-import Utility.GameObject;
+import Rendering.GameObject;
 import Utility.QuickDraw;
-import Utility.Sprite;
+import Rendering.Sprite;
 
 import javax.media.opengl.GLAutoDrawable;
 

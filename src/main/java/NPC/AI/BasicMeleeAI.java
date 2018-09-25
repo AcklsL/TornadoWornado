@@ -1,9 +1,8 @@
 package NPC.AI;
 
 import Rendering.ObjectRenderer;
-import Utility.GameObject;
-import Utility.HeldItem;
-import Utility.Sprite;
+import Rendering.GameObject;
+import Rendering.Sprite;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,6 +77,7 @@ public class BasicMeleeAI extends BaseAI{
                 if (i != self && !i.isIgnore()) {
                     if (self.isTouchingEast(i) && !self.isTouchingNorth(i)) {
                         move = false;
+                        break;
                     }
                 }
             }
@@ -98,6 +98,7 @@ public class BasicMeleeAI extends BaseAI{
                 if (i != self && !i.isIgnore()) {
                     if (self.isTouchingWest(i) && !self.isTouchingNorth(i)) {
                         move = false;
+                        break;
                     }
                 }
             }

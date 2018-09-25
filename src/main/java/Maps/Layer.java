@@ -1,6 +1,6 @@
 package Maps;
 
-import Utility.GameObject;
+import Rendering.GameObject;
 
 import java.util.ArrayList;
 

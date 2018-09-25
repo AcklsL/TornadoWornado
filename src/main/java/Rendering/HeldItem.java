@@ -1,6 +1,10 @@
-package Utility;
+package Rendering;
 
+import Rendering.GameObject;
 import Rendering.ObjectRenderer;
+import Rendering.Sprite;
+import Utility.GLInstruct;
+import Utility.QuickDraw;
 import Weapons.Weapon;
 
 import javax.media.opengl.GLAutoDrawable;
@@ -30,9 +34,9 @@ public class HeldItem extends GameObject {
 
     public void swing(Weapon in) {
         for (Sprite i : ObjectRenderer.getSprites()) {
-            if (i != holder && this.isTouching(holder,i)) {
+            if (i != holder && this.isTouching(i)) {
                 i.changeHealth(in.getDamage());
-                i.getHealthbar().setPercent((double) i.getHealth() / (double) i.getMaxHealth());
+                i.getHealthbar().setPercent(i.getHealth() / i.getMaxHealth());
                 i.getOnHit().onHitAction(in);
             }
         }

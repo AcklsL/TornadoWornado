@@ -103,12 +103,12 @@ public class Overlay {
     }
 
     /**
-     * When inputting an x value, input or output must be reversed NOT BOTH.
+     * When inputting an x value, output must be reversed.
      * When inputting a y value, keep same.
      * @param in value to change
      * @return x or y value converted to double
      */
     public static double cnvrtCanvasINTtoDBL(int in) {
-        return  (1 - ((double)  in/250.0));
+        return  (1 - (((double) in)/250.0));
     }
 }
