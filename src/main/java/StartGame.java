@@ -4,12 +4,9 @@ import Maps.DefaultMap;
 import Maps.ObjectMap;
 import NPC.AI.BasicMeleeAI;
 import NPC.AI.PlayerAI;
-import Rendering.ObjectRenderer;
-import Rendering.Projectile;
+import Rendering.*;
 import UI.CharacterStatusBar;
 import Utility.GLInstruct;
-import Rendering.GameObject;
-import Rendering.Sprite;
 import Utility.onHit;
 import Weapons.Melee.Iron_Shortsword;
 import Weapons.Weapon;
@@ -33,7 +30,6 @@ public class StartGame {
     private static JFrame frame;
     private static FPSAnimator animator;
     private static KeyFinder listener;
-    private static ObjectRenderer renderer;
     private static MouseEvents mouseListener;
 
     private static final int canvasX = 500;
@@ -47,7 +43,6 @@ public class StartGame {
     private static Iron_Shortsword test;
 
     private static Sprite character;
-    private static Sprite testSprite;
     private static PlayerAI playerAI;
     private static ObjectMap currentMap;
 
@@ -68,7 +63,6 @@ public class StartGame {
         animator = new FPSAnimator(canvas, fps);
         keys = new ArrayList<Integer>();
         listener = new KeyFinder(keys);
-        renderer = new ObjectRenderer();
         canJump = true;
         timer = new Timer();
         mouseListener = new MouseEvents();
@@ -162,35 +156,27 @@ public class StartGame {
              */
             public void init(GLAutoDrawable glAutoDrawable) {
                 character = new Sprite("Character", 100, 0.0, 0.5, 0.125, 0.125,
-                        new File("./src/main/java/Assets/bon.jpg"), new onHit() {
+                        FileHolder.getBon(), new onHit() {
                     public void onHitAction(Weapon in) {
                         System.out.println(in.getHolder().getIdentifier() + " struck character for " + in.getDamage() + " damage with " + in.getName());
                     }
                 }, playerAI);
-                testSprite = new Sprite("testSprite", 100, -0.5, 0.0, 0.125, 0.125,
-                        new File("./src/main/java/Assets/nou.png"), new onHit() {
-                    public void onHitAction(Weapon in) {
-                        System.out.println(in.getHolder().getIdentifier() + " struck testSprite for " + in.getDamage() + " damage with " + in.getName());
-                    }
-                }, new BasicMeleeAI(character));
                 playerAI.supplySprite(character);
-                testSprite.getAI().supplySprite(testSprite);
                 test = new Iron_Shortsword(character);
                 currentMap = new DefaultMap();
                 ObjectRenderer.addObjectToScreen(character);
-                ObjectRenderer.addObjectToScreen(testSprite);
                 ObjectRenderer.addObjectToScreen(test.getImage());
                 ObjectRenderer.addMapToScreen(currentMap);
                 statusBar = new CharacterStatusBar();
                 ObjectRenderer.addOverlay(statusBar);
-                renderer.createInstruct();
+                ObjectRenderer.createInstruct();
             }
 
             /**
              * Ran at close of program
              */
             public void dispose(GLAutoDrawable glAutoDrawable) {
-                renderer.setInstruct(new GLInstruct() {
+                ObjectRenderer.setInstruct(new GLInstruct() {
                     public void instruct(GLAutoDrawable glAutoDrawable) {
 
                     }
@@ -212,10 +198,11 @@ public class StartGame {
                 for (Projectile i : ObjectRenderer.getProjectiles()) {
                     i.move();
                 }
+                ObjectRenderer.getAbilityQ().cooldownUpdate();
+                ObjectRenderer.getAbilityE().cooldownUpdate();
                 ObjectRenderer.filter();
-                renderer.getInstruct().instruct(glAutoDrawable);
-                character.changeHealth(0.05);
-                character.changeMana(0.08);
+                ObjectRenderer.getInstruct().instruct(glAutoDrawable);
+                character.changeMana(0.13);
             }
 
             /**
@@ -256,6 +243,14 @@ public class StartGame {
             if (character.holdingItem()) {
                 character.getItem().onRightClick();
             }
+        }
+
+        if (listener.containsKey(KeyEvent.VK_Q)) {
+            ObjectRenderer.getAbilityQ().getEffectInstructions().instruct();
+        }
+
+        if (listener.containsKey(KeyEvent.VK_E)) {
+            ObjectRenderer.getAbilityE().getEffectInstructions().instruct();
         }
 
         //if (listener.containsKey(KeyEvent.VK_W)) { }

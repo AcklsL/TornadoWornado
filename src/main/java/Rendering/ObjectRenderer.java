@@ -1,5 +1,8 @@
 package Rendering;
 
+import Abilities.AbilityBase;
+import Abilities.DefaultTestE;
+import Abilities.DefaultTestQ;
 import Maps.ObjectMap;
 import UI.Healthbar;
 import UI.Overlay;
@@ -19,25 +22,16 @@ public class ObjectRenderer {
      * 0 - Character. Always
      * 1 - Map
      */
-    private static ArrayList<GameObject> images;
-    private static ArrayList<Sprite> sprites;
-    private static ArrayList<HeldItem> heldItems;
-    private static ArrayList<Healthbar> healthbars;
-    private static ArrayList<Overlay> overlays;
-    private static ArrayList<Projectile> projectiles;
-    private static ArrayList<GameObject> toPurge;
+    private static ArrayList<GameObject> images = new ArrayList<GameObject>();
+    private static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+    private static ArrayList<HeldItem> heldItems = new ArrayList<HeldItem>();
+    private static ArrayList<Healthbar> healthbars = new ArrayList<Healthbar>();
+    private static ArrayList<Overlay> overlays = new ArrayList<Overlay>();
+    private static ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+    private static ArrayList<GameObject> toPurge = new ArrayList<GameObject>();
+    private static AbilityBase[] abilities = {new DefaultTestQ(), new DefaultTestE()};
 
-    private GLInstruct instruct;
-
-    public ObjectRenderer() {
-        images = new ArrayList<GameObject>();
-        sprites = new ArrayList<Sprite>();
-        heldItems = new ArrayList<HeldItem>();
-        healthbars = new ArrayList<Healthbar>();
-        overlays = new ArrayList<Overlay>();
-        projectiles = new ArrayList<Projectile>();
-        toPurge = new ArrayList<GameObject>();
-    }
+    private static GLInstruct instruct;
 
     public static void addOverlay(Overlay in) {
         overlays.add(in);
@@ -65,6 +59,22 @@ public class ObjectRenderer {
         for (Sprite sprite : in.getMapSprites()) {
             addObjectToScreen(sprite);
         }
+    }
+
+    public static void setAbilityQ(AbilityBase i) {
+        abilities[0] = i;
+    }
+
+    public static void setAbilityE(AbilityBase i) {
+        abilities[1] = i;
+    }
+
+    public static AbilityBase getAbilityQ() {
+        return abilities[0];
+    }
+
+    public static AbilityBase getAbilityE() {
+        return abilities[1];
     }
 
     public static BufferedImage fileToBufferedImage(File in) {
@@ -95,12 +105,12 @@ public class ObjectRenderer {
         }
     }
 
-    public GLInstruct getInstruct() {
+    public static GLInstruct getInstruct() {
         return instruct;
     }
 
-    public void setInstruct(GLInstruct instruct) {
-        this.instruct = instruct;
+    public static void setInstruct(GLInstruct instructa) {
+        instruct = instructa;
     }
 
     public static ArrayList<GameObject> getImages() {
@@ -120,15 +130,18 @@ public class ObjectRenderer {
     /**
      * Run only AFTER adding all images req. to screen.
      */
-    public void createInstruct() {
+    public static void createInstruct() {
         if (!images.isEmpty() && !overlays.isEmpty()) {
             instruct = new GLInstruct() {
                 public void instruct(GLAutoDrawable glAutoDrawable) {
                     for (GameObject i : images) {
                         i.getRenderInstructions().instruct(glAutoDrawable);
                     }
-                    for (Overlay i : overlays) {
-                        i.getInstruct().instruct(glAutoDrawable);
+                    for (Overlay b : overlays) {
+                        b.getInstruct().instruct(glAutoDrawable);
+                    }
+                    for (int i = 0; i < abilities.length; i++) {
+                        abilities[i].getRenderInstructions().instruct(glAutoDrawable);
                     }
                 }
             };

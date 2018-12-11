@@ -113,4 +113,8 @@ public class Projectile extends GameObject{
         yVelocity /= flightSpeed;
         return new Projectile(identity, xVelocity, yVelocity, -1, ignore.getX(),ignore.getY() + (ignore.getyBound()/2), image, ignore);
     }
+
+    public static Projectile genProjectile(String identity, double xVelocity, double yVelocity, Sprite ignore, File image) {
+        return new Projectile(identity, xVelocity, yVelocity, -1, ignore.getX(), ignore.getY() + (ignore.getyBound()/2), image, ignore);
+    }
 }
