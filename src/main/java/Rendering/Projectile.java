@@ -28,7 +28,7 @@ public class Projectile extends GameObject{
         this.y = yi;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, Projectile.super.getX(), Projectile.super.getY(), w, h, glAutoDrawable);
+                QuickDraw.quickTexture(image, Projectile.super.getX(), Projectile.super.getY(), w, h, glAutoDrawable);
             }
         });
     }
@@ -44,7 +44,7 @@ public class Projectile extends GameObject{
         this.y = yi;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, Projectile.super.getX(), Projectile.super.getY(), 0.0625, 0.0625, glAutoDrawable);
+                QuickDraw.quickTexture(image, Projectile.super.getX(), Projectile.super.getY(), 0.0625, 0.0625, glAutoDrawable);
             }
         });
     }
@@ -60,7 +60,7 @@ public class Projectile extends GameObject{
         ignoreSprite = in;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, Projectile.super.getX(), Projectile.super.getY(), w, h, glAutoDrawable);
+                QuickDraw.quickTexture(image, Projectile.super.getX(), Projectile.super.getY(), w, h, glAutoDrawable);
             }
         });
     }
@@ -77,20 +77,24 @@ public class Projectile extends GameObject{
         ignoreSprite = in;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, Projectile.super.getX(), Projectile.super.getY(), 0.0625, 0.0625, glAutoDrawable);
+                QuickDraw.quickTexture(image, Projectile.super.getX(), Projectile.super.getY(), 0.0625, 0.0625, glAutoDrawable);
             }
         });
     }
 
     public void move() {
         super.movePosBy(xVelocity,yVelocity);
-        for (GameObject i : ObjectRenderer.getImages()) {
-            if (!(i instanceof Projectile) && i != ignoreSprite && (!super.onScreen() || super.isTouching(i))) {
-                if (i instanceof Sprite) {
-                    Sprite is = (Sprite) i;
-                    is.changeHealth(damage);
-                    is.getHealthbar().setPercent(is.getHealth() / is.getMaxHealth());
-                }
+        for (GameObject i : ObjectRenderer.getTiles()) {
+            if (super.isTouching(i) || !super.onScreen()) {
+                super.setIgnore(true);
+                ObjectRenderer.purge(this);
+                break;
+            }
+        }
+        for (Sprite is : ObjectRenderer.getSprites()) {
+            if (is != ignoreSprite && super.isTouching(is)) {
+                is.changeHealth(damage);
+                is.getHealthbar().setPercent(is.getHealth() / is.getMaxHealth());
                 super.setIgnore(true);
                 ObjectRenderer.purge(this);
                 break;

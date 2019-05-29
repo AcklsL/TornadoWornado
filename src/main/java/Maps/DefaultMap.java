@@ -1,6 +1,7 @@
 package Maps;
 
 import Rendering.FileHolder;
+import Rendering.Tile;
 import Utility.GLInstruct;
 import Rendering.GameObject;
 import Utility.QuickDraw;
@@ -31,45 +32,45 @@ public class DefaultMap extends ObjectMap{
         objects = new ArrayList<GameObject>();
         mapSprites = new ArrayList<Sprite>();
 
-        WestBorder = new GameObject("West Wall - Default Map", false, false, -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        WestBorder = new Tile("West Wall - Default Map", -2.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(), false, WestBorder, glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(), WestBorder, glAutoDrawable);
             }
         });
 
-        EastBorder = new GameObject("East Wall - Default Map", false,false, 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
+        EastBorder = new Tile("East Wall - Default Map", 5.0, -1.0, 0.5, 2.0, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false,EastBorder,glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),EastBorder,glAutoDrawable);
             }
         });
 
-        NorthBorder = new GameObject("North Wall - Default Map", false,false, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
+        NorthBorder = new Tile("North Wall - Default Map",true, -2.0, 0.8, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false,NorthBorder,glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),NorthBorder,glAutoDrawable);
             }
         });
 
-        SouthBorder = new GameObject("South Wall - Default Map", false,false, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
+        SouthBorder = new Tile("South Wall - Default Map",true, -2.0, -1.0, 7.0, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false,SouthBorder,glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),SouthBorder,glAutoDrawable);
             }
         });
 
-        PlatformA = new GameObject("Platform A - Default Map", false,false, 0.2, -0.6, 0.4, 0.2, new GLInstruct() {
+        PlatformA = new Tile("Platform A - Default Map", 0.2, -0.6, 0.4, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false, PlatformA, glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),PlatformA, glAutoDrawable);
             }
         });
 
-        PlatformB = new GameObject("Platform B - Default Map", false,false, 0.7, -0.4, 0.4, 0.3, new GLInstruct() {
+        PlatformB = new Tile("Platform B - Default Map", 0.7, -0.4, 0.4, 0.3, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false,PlatformB,glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),PlatformB,glAutoDrawable);
             }
         });
 
-        PlatformC = new GameObject("Platform C - Default Map", false,false, -0.2, -0.8, 0.4, 0.2, new GLInstruct() {
+        PlatformC = new Tile("Platform C - Default Map", -0.2, -0.8, 0.4, 0.2, new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getBon(),false,PlatformC,glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getBon(),PlatformC,glAutoDrawable);
             }
         });
 

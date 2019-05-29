@@ -22,7 +22,9 @@ public class ObjectRenderer {
      * 0 - Character. Always
      * 1 - Map
      */
-    private static ArrayList<GameObject> images = new ArrayList<GameObject>();
+    //private static ArrayList<GameObject> images = new ArrayList<GameObject>();  DEPRECIATED
+    private static ArrayList<Tile> tiles = new ArrayList<Tile>();
+    private static ArrayList<GameObject> onHold = new ArrayList<GameObject>(); //All items that are not going to be rendered.
     private static ArrayList<Sprite> sprites = new ArrayList<Sprite>();
     private static ArrayList<HeldItem> heldItems = new ArrayList<HeldItem>();
     private static ArrayList<Healthbar> healthbars = new ArrayList<Healthbar>();
@@ -38,17 +40,15 @@ public class ObjectRenderer {
     }
 
     public static void addObjectToScreen(GameObject image) {
-        images.add(image);
         if (image instanceof Sprite) {
             sprites.add((Sprite) image);
-            images.add(((Sprite) image).getHealthbar());
             healthbars.add(((Sprite) image).getHealthbar());
-        }
-        if (image instanceof Projectile) {
+        } else if (image instanceof Projectile) {
             projectiles.add((Projectile) image);
-        }
-        if (image instanceof HeldItem) {
+        } else if (image instanceof HeldItem) {
             heldItems.add((HeldItem) image);
+        } else if (image instanceof Tile) {
+            tiles.add((Tile) image);
         }
     }
 
@@ -61,12 +61,35 @@ public class ObjectRenderer {
         }
     }
 
+    public static ArrayList<GameObject> getOnHold() {
+        return onHold;
+    }
+
     public static void setAbilityQ(AbilityBase i) {
         abilities[0] = i;
     }
 
     public static void setAbilityE(AbilityBase i) {
         abilities[1] = i;
+    }
+
+    public static void show(GameObject i) {
+        addObjectToScreen(i);
+        onHold.remove(i);
+    }
+
+    public static void hide(GameObject i) {
+        onHold.add(i);
+        if (i instanceof Sprite) {
+            sprites.remove(i);
+            healthbars.remove(((Sprite) i).getHealthbar());
+        } else if (i instanceof Projectile) {
+            projectiles.remove(i);
+        } else if (i instanceof HeldItem) {
+            heldItems.remove(i);
+        } else if (i instanceof Tile) {
+            tiles.remove(i);
+        }
     }
 
     public static AbilityBase getAbilityQ() {
@@ -94,13 +117,14 @@ public class ObjectRenderer {
 
     public static void filter() {
         for (GameObject i : toPurge) {
-            images.remove(i);
             if (i instanceof Sprite) {
                 sprites.remove(i);
             } else if (i instanceof HeldItem) {
                 heldItems.remove(i);
             } else if (i instanceof Projectile) {
                 projectiles.remove(i);
+            } else if (i instanceof Tile) {
+                if (tiles.contains(i)) tiles.remove(i);
             }
         }
     }
@@ -113,8 +137,8 @@ public class ObjectRenderer {
         instruct = instructa;
     }
 
-    public static ArrayList<GameObject> getImages() {
-        return images;
+    public static ArrayList<Tile> getTiles() {
+        return tiles;
     }
 
     public static ArrayList<Sprite> getSprites() {
@@ -131,10 +155,19 @@ public class ObjectRenderer {
      * Run only AFTER adding all images req. to screen.
      */
     public static void createInstruct() {
-        if (!images.isEmpty() && !overlays.isEmpty()) {
+        if (!tiles.isEmpty() && !overlays.isEmpty() && !sprites.isEmpty()) {
             instruct = new GLInstruct() {
                 public void instruct(GLAutoDrawable glAutoDrawable) {
-                    for (GameObject i : images) {
+                    for (GameObject i : tiles) {
+                        i.getRenderInstructions().instruct(glAutoDrawable);
+                    }
+                    for (GameObject i : sprites) {
+                        i.getRenderInstructions().instruct(glAutoDrawable);
+                    }
+                    for (GameObject i : projectiles) {
+                        i.getRenderInstructions().instruct(glAutoDrawable);
+                    }
+                    for (GameObject i : healthbars) {
                         i.getRenderInstructions().instruct(glAutoDrawable);
                     }
                     for (Overlay b : overlays) {

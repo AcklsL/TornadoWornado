@@ -38,7 +38,7 @@ public class DefaultTestQ extends AbilityBase{
                         break;
                     }
                 }
-                if (ignore.getMana() - 50 > 0) {
+                if (ignore.getMana() - manaCost >= 0) {
                     double x = 0;
                     double y = 0.1;
                     for (int i = 0; i < 4; i++) {
@@ -70,7 +70,7 @@ public class DefaultTestQ extends AbilityBase{
     public DefaultTestQ() {
         imageInstructions = new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, -0.5, -1.0, 0.25, 0.2, glAutoDrawable);
+                QuickDraw.quickTexture(image, -0.5, -1.0, 0.25, 0.2, glAutoDrawable);
                 if (onCooldown) {
                     QuickDraw.drawCooldown(currCooldownTime, cooldownTime, -0.5, -1.0, 0.2, glAutoDrawable);
                 }

@@ -21,8 +21,8 @@ public class BasicMeleeAI extends BaseAI{
     public void nextMove() {
         try {
             if (!(self.getY() <= -1.0)) {
-                for (GameObject i : ObjectRenderer.getImages()) {
-                    if (self != i && self.isTouchingNorth(i)) {
+                for (GameObject i : ObjectRenderer.getTiles()) {
+                    if (self.isTouchingNorth(i)) {
                         canJump = true;
                         break;
                     }
@@ -34,11 +34,9 @@ public class BasicMeleeAI extends BaseAI{
             //Determine if target is to the left or right of self
             boolean jump = false;
             if (self.getxPos() < target.getxPos()) { //Self is to the left of Target.
-                for (GameObject i : ObjectRenderer.getImages()) {
-                    if (!(i instanceof Sprite)) {
-                        if (self.isTouchingWest(i)) {
-                            jump = true;
-                        }
+                for (GameObject i : ObjectRenderer.getTiles()) {
+                    if (self.isTouchingWest(i)) {
+                        jump = true;
                     }
                 }
 
@@ -49,11 +47,9 @@ public class BasicMeleeAI extends BaseAI{
                     onRightMovement();
                 }
             } else if (self.getxPos() > (target.getxPos() + target.getxBound())) { //Self is to the right of Target.
-                for (GameObject i : ObjectRenderer.getImages()) {
-                    if (!(i instanceof Sprite)) {
-                        if (self.isTouchingEast(i)) {
-                            jump = true;
-                        }
+                for (GameObject i : ObjectRenderer.getTiles()) {
+                    if (self.isTouchingEast(i)) {
+                        jump = true;
                     }
                 }
 
@@ -73,8 +69,8 @@ public class BasicMeleeAI extends BaseAI{
         try {
             //self.flip(true);
             boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != self && !i.isIgnore()) {
+            for (GameObject i : ObjectRenderer.getTiles()) {
+                if (!i.isIgnore()) {
                     if (self.isTouchingEast(i) && !self.isTouchingNorth(i)) {
                         move = false;
                         break;
@@ -94,8 +90,8 @@ public class BasicMeleeAI extends BaseAI{
         try {
             //self.flip(false);
             boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (i != self && !i.isIgnore()) {
+            for (GameObject i : ObjectRenderer.getTiles()) {
+                if (!i.isIgnore()) {
                     if (self.isTouchingWest(i) && !self.isTouchingNorth(i)) {
                         move = false;
                         break;

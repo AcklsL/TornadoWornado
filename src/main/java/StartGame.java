@@ -1,4 +1,5 @@
 import Abilities.AbilityBase;
+import Abilities.DefaultTestQ;
 import KeyBinds.*;
 import Maps.DefaultMap;
 import Maps.ObjectMap;
@@ -21,6 +22,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,6 +41,7 @@ public class StartGame {
     private static Timer timer;
     private static boolean canJump;
     private static boolean inAir;
+    private static boolean isMoving;
 
     private static Iron_Shortsword test;
 
@@ -64,6 +67,7 @@ public class StartGame {
         keys = new ArrayList<Integer>();
         listener = new KeyFinder(keys);
         canJump = true;
+        isMoving = false;
         timer = new Timer();
         mouseListener = new MouseEvents();
         playerAI = new PlayerAI();
@@ -162,6 +166,8 @@ public class StartGame {
                     }
                 }, playerAI);
                 playerAI.supplySprite(character);
+                character.setIdleChar(FileHolder.getBon());
+                character.setMoveChar(FileHolder.getNou());
                 test = new Iron_Shortsword(character);
                 currentMap = new DefaultMap();
                 ObjectRenderer.addObjectToScreen(character);
@@ -190,19 +196,42 @@ public class StartGame {
                 GL2 gl = glAutoDrawable.getGL().getGL2(); //Intiator
                 gl.glLoadIdentity(); //Reset screen.
                 gl.glClear(GL2.GL_COLOR_BUFFER_BIT); //Reset screen.
-                if (keys != null && !keys.isEmpty()) keyTest();
+                if (keys != null && (!keys.isEmpty() || mouseListener.isLMB() || mouseListener.isRMB())) keyTest();
                 physics();
+                ArrayList<GameObject> toHide = new ArrayList<GameObject>();
                 for (Sprite i : ObjectRenderer.getSprites()) {
+                    if (!i.onScreen()){
+                        toHide.add(i);
+                        continue;
+                    }
                     i.getAI().nextMove(); //See BaseAI
                 }
                 for (Projectile i : ObjectRenderer.getProjectiles()) {
                     i.move();
                 }
+                for (Tile i : ObjectRenderer.getTiles()) {
+                    if (!i.onScreen()){
+                        //System.out.println(i.getIdentifier() + " " + "(" + i.getX() + "," + i.getY() + ") ");
+                        toHide.add(i);
+                    }
+                }
                 ObjectRenderer.getAbilityQ().cooldownUpdate();
                 ObjectRenderer.getAbilityE().cooldownUpdate();
                 ObjectRenderer.filter();
+                for (GameObject i : toHide) {
+                    ObjectRenderer.hide(i);
+                }
                 ObjectRenderer.getInstruct().instruct(glAutoDrawable);
                 character.changeMana(0.13);
+                ArrayList<Tile> toShow = new ArrayList<Tile>();
+                for (GameObject i : ObjectRenderer.getOnHold()) {
+                    if (i.onScreen()) {
+                        toShow.add((Tile) i);
+                    }
+                }
+                for (Tile i: toShow) {
+                    ObjectRenderer.show(i);
+                }
             }
 
             /**
@@ -254,25 +283,34 @@ public class StartGame {
         }
 
         //if (listener.containsKey(KeyEvent.VK_W)) { }
-
         if (listener.containsKey(KeyEvent.VK_A)) {
             character.getAI().onLeftMovement();
             character.flip(true);
+            if (!isMoving) {
+                character.setCharSprite(character.getMoveChar());
+            } else {
+                isMoving = true;
+            }
+        } else if (listener.containsKey(KeyEvent.VK_D)) {
+            character.getAI().onRightMovement();
+            character.flip(false);
+            if (!isMoving) {
+                character.setCharSprite(character.getMoveChar());
+            } else {
+                isMoving = true;
+            }
+        } else if (isMoving) {
+            isMoving = false;
+            character.setCharSprite(character.getIdleChar());
         }
 
         if (listener.containsKey(KeyEvent.VK_S)) {
             character.getAI().onDownMovement();
         }
 
-        if (listener.containsKey(KeyEvent.VK_D)) {
-            character.getAI().onRightMovement();
-            character.flip(false);
-        }
-
         //Ensures that you can't jump into something from the bottom.
-        for (GameObject i : ObjectRenderer.getImages()) {
-            if (i != character && !(i instanceof Sprite) && !(i instanceof Projectile)
-                    && (character.isTouchingSouth(i) && !(character.isTouchingEast(i) || character.isTouchingWest(i)))) {
+        for (GameObject i : ObjectRenderer.getTiles()) {
+            if (i != character && (character.isTouchingSouth(i) && !(character.isTouchingEast(i) || character.isTouchingWest(i)))) {
                 canJump = false;
                 break;
             }
@@ -299,18 +337,11 @@ public class StartGame {
      * Affects ALL SPRITES!
      */
     private static void physics() {
-        ArrayList<Sprite> toFall = new ArrayList<Sprite>(); //List of sprites that will fall.
+        ArrayList<Sprite> toFall = (ArrayList<Sprite>) ObjectRenderer.getSprites().clone(); //List of sprites that will fall.
         for (Sprite sprite : ObjectRenderer.getSprites()) {
-            toFall.add(sprite); //Adds all the sprites to above list.
-            for (GameObject object : ObjectRenderer.getImages()) {
-                if (sprite != object && !object.isIgnore() && !(object instanceof Projectile)) { //This line prevents self-checking. See Objectrenderer for more info
+            for (GameObject object : ObjectRenderer.getTiles()) {
+                if (!object.isIgnore() && !(object instanceof Projectile)) { //This line prevents self-checking. See Objectrenderer for more info
                     if (sprite.isTouchingNorth(object)) { //If it is touching the north side of an object
-                        toFall.remove(sprite);
-                        if (sprite == character) {
-                            canJump = true;
-                        }
-                        break;
-                    } else if (!(sprite.getyPos() > -1.0)) { //If it is on the bottom of the screen.
                         toFall.remove(sprite);
                         if (sprite == character) {
                             canJump = true;

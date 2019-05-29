@@ -23,7 +23,7 @@ public class CharacterStatusBar extends Overlay{
         }
         super.setInstruct(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(FileHolder.getStatusBar(), false,  -0.5, -1.0, 1.0, 0.2, glAutoDrawable);
+                QuickDraw.quickTexture(FileHolder.getStatusBar(),  -0.5, -1.0, 1.0, 0.2, glAutoDrawable);
                 QuickDraw.drawHealthLine(character.getHealth() / character.getMaxHealth(), -0.3, -0.88, 0.6, 0.05, glAutoDrawable);
                 QuickDraw.drawPercentageBar(FileHolder.getManaBar(), character.getMana() / character.getMaxMana(), -0.3, -0.98, 0.6, 0.05, glAutoDrawable);
             }

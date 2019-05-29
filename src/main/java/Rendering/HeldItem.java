@@ -27,7 +27,7 @@ public class HeldItem extends GameObject {
         h = yBound;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, spriteHolder.getX() + spriteHolder.getWidth(), spriteHolder.getY(), xBound, yBound, glAutoDrawable);
+                QuickDraw.quickTexture(image, spriteHolder.getX() + spriteHolder.getWidth(), spriteHolder.getY(), xBound, yBound, glAutoDrawable);
             }
         });
     }

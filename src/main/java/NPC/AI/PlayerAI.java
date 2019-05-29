@@ -29,8 +29,8 @@ public class PlayerAI extends BaseAI {
     public void onLeftMovement() {
         try {
             boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (!i.isIgnore() && i != character && !(i instanceof Projectile)) {
+            for (GameObject i : ObjectRenderer.getTiles()) {
+                if (!i.isIgnore()) {
                     if (character.isTouchingEast(i) && !character.isTouchingNorth(i)) {
                         move = false;
                         break;
@@ -38,13 +38,18 @@ public class PlayerAI extends BaseAI {
                 }
             }
             if (move) {
-                for (GameObject i : ObjectRenderer.getImages()) {
+                for (GameObject i : ObjectRenderer.getTiles()) {
+                    i.movePosBy(moveSpeed, 0.0);
+                }
+                for (GameObject i : ObjectRenderer.getOnHold()) {
+                    i.movePosBy(moveSpeed, 0.0);
+                }
+                for (GameObject i : ObjectRenderer.getProjectiles()) {
+                    i.movePosBy(moveSpeed, 0.0);
+                }
+                for (Sprite i : ObjectRenderer.getSprites()) {
                     if (i != character) {
-                        if (i instanceof Sprite) {
-                            ((Sprite) i).moveSpritePosBy(moveSpeed,0.0);
-                        } else {
-                            i.movePosBy(moveSpeed, 0.0);
-                        }
+                        i.moveSpritePosBy(moveSpeed,0.0);
                     }
                 }
             }
@@ -56,8 +61,8 @@ public class PlayerAI extends BaseAI {
     public void onRightMovement() {
         try {
             boolean move = true;
-            for (GameObject i : ObjectRenderer.getImages()) {
-                if (!i.isIgnore() && i != character && !(i instanceof Projectile)) {
+            for (GameObject i : ObjectRenderer.getTiles()) {
+                if (!i.isIgnore()) {
                     if (character.isTouchingWest(i) && !character.isTouchingNorth(i)) {
                         move = false;
                         break;
@@ -65,13 +70,18 @@ public class PlayerAI extends BaseAI {
                 }
             }
             if (move) {
-                for (GameObject i : ObjectRenderer.getImages()) {
+                for (GameObject i : ObjectRenderer.getTiles()) {
+                    i.movePosBy(-moveSpeed, 0.0);
+                }
+                for (GameObject i : ObjectRenderer.getOnHold()) {
+                    i.movePosBy(-moveSpeed, 0.0);
+                }
+                for (GameObject i : ObjectRenderer.getProjectiles()) {
+                    i.movePosBy(-moveSpeed, 0.0);
+                }
+                for (Sprite i : ObjectRenderer.getSprites()) {
                     if (i != character) {
-                        if (i instanceof Sprite) {
-                            ((Sprite) i).moveSpritePosBy(-moveSpeed,0.0);
-                        } else {
-                            i.movePosBy(-moveSpeed, 0.0);
-                        }
+                        i.moveSpritePosBy(-moveSpeed,0.0);
                     }
                 }
             }

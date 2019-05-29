@@ -27,7 +27,7 @@ public class Overlay {
 
         instruct = new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, x, y, w, h, glAutoDrawable);
+                QuickDraw.quickTexture(image, x, y, w, h, glAutoDrawable);
             }
         };
     }

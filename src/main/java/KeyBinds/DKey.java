@@ -16,6 +16,7 @@ public class DKey extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if (!events.contains(KeyEvent.VK_D)) {
             events.add(KeyEvent.VK_D);
+            System.out.println("d");
         }
     }
 

@@ -9,20 +9,23 @@ import Utility.GLInstruct;
 import Utility.QuickDraw;
 import Utility.onHit;
 import Weapons.Weapon;
+import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import java.io.File;
 
 public class Sprite extends GameObject {
 
     private File charSprite;
+    private File idleChar;
+    private File moveChar;
     private double xPos;
     private double yPos;
     private double height;
     private double width;
     private Utility.onHit onHit;
     private BaseAI AI;
-    private boolean flip;
 
     private double mana;
     private final double maxMana = 100.0;
@@ -45,11 +48,10 @@ public class Sprite extends GameObject {
         maxHealth = health;
         onHit = in;
         hasItem = null;
-        flip = false;
         mana = 100;
         super.setRenderInstructions(new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(charSprite,flip, xPos, yPos, width, height, glAutoDrawable);
+                QuickDraw.quickTexture(charSprite, xPos, yPos, width, height, glAutoDrawable);
             }
         });
         charSprite = spriteImage;
@@ -60,6 +62,7 @@ public class Sprite extends GameObject {
             healthbar = new Healthbar();
         }
     }
+
 
     public boolean changeMana(double in) {
         if (mana <= 0) {
@@ -104,22 +107,58 @@ public class Sprite extends GameObject {
     }
 
     public void flip(boolean in) {
-        flip = in;
-        if (flip) {
+        final Sprite thisSprite = this;
+        if (in) {
             hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
                 public void instruct(GLAutoDrawable glAutoDrawable) {
-                    QuickDraw.quickTexture(hasItem.getHeldItem().getImg(), flip, xPos - hasItem.getHeldItem().getW(), yPos,
+                    QuickDraw.quickTextureFlipped(hasItem.getHeldItem().getImg(), xPos - hasItem.getHeldItem().getW(), yPos,
                             hasItem.getHeldItem().getW(), hasItem.getHeldItem().getH(), glAutoDrawable);
+                }
+            });
+            super.setRenderInstructions(new GLInstruct() {
+                public void instruct(GLAutoDrawable glAutoDrawable) {
+                    QuickDraw.quickTextureFlipped(charSprite, thisSprite, glAutoDrawable);
                 }
             });
         } else {
             hasItem.getHeldItem().setRenderInstructions(new GLInstruct() {
                 public void instruct(GLAutoDrawable glAutoDrawable) {
-                    QuickDraw.quickTexture(hasItem.getHeldItem().getImg(), flip, xPos + width, yPos,
+                    QuickDraw.quickTexture(hasItem.getHeldItem().getImg(), xPos + width, yPos,
                             hasItem.getHeldItem().getW(), hasItem.getHeldItem().getH(), glAutoDrawable);
                 }
             });
+            super.setRenderInstructions(new GLInstruct() {
+                public void instruct(GLAutoDrawable glAutoDrawable) {
+                    QuickDraw.quickTexture(charSprite, thisSprite, glAutoDrawable);
+                }
+            });
         }
+    }
+
+    public File getIdleChar() {
+        try {
+            return idleChar;
+        } catch (NullPointerException e) {
+            System.err.println("No Idle Sprite supplied for: " + getIdentifier());
+            return charSprite;
+        }
+    }
+
+    public void setIdleChar(File idleChar) {
+        this.idleChar = idleChar;
+    }
+
+    public File getMoveChar() {
+        try {
+            return moveChar;
+        } catch (NullPointerException e) {
+            System.err.println("No Idle Sprite supplied for: " + getIdentifier());
+            return charSprite;
+        }
+    }
+
+    public void setMoveChar(File moveChar) {
+        this.moveChar = moveChar;
     }
 
     public double getMaxHealth() {
@@ -208,7 +247,6 @@ public class Sprite extends GameObject {
     public double getyPos() {
         return yPos;
     }
-
 
     public void setyPos(double yPos) {
         this.yPos = yPos;

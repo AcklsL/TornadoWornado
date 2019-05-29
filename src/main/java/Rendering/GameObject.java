@@ -1,8 +1,10 @@
 package Rendering;
 
 import Utility.GLInstruct;
+import Utility.QuickDraw;
 
 import javax.media.opengl.GLAutoDrawable;
+import java.io.File;
 
 
 public class GameObject {
@@ -15,6 +17,7 @@ public class GameObject {
     private GLInstruct render;
     private boolean isBackground;
     private boolean ignore;
+    private boolean persist;
 
     private final double boundTolerance = 0.005; // MUST BE LESS THAN 0.1! Otherwise things get janky.
 
@@ -25,12 +28,33 @@ public class GameObject {
         this.xBound = xBound;
         this.yBound = yBound;
         ignore = ignoreCheck;
+        persist = false;
         render = new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
                 objectRender.instruct(glAutoDrawable);
             }
         };
         isBackground = background;
+    }
+
+    public GameObject(String identity, boolean pers, boolean background, boolean ignoreCheck, double xPos, double yPos, double xBound, double yBound, final GLInstruct objectRender) {
+        identifier = identity;
+        x = xPos;
+        y = yPos;
+        this.xBound = xBound;
+        this.yBound = yBound;
+        persist = pers;
+        ignore = ignoreCheck;
+        render = new GLInstruct() {
+            public void instruct(GLAutoDrawable glAutoDrawable) {
+                objectRender.instruct(glAutoDrawable);
+            }
+        };
+        isBackground = background;
+    }
+
+    public boolean isPersist() {
+        return persist;
     }
 
     public boolean isIgnore() {
@@ -137,10 +161,12 @@ public class GameObject {
     }
 
     public boolean onScreen() {
-        if (x + xBound <= 1.0 && x >= -1.0 && y + yBound <= 1.0 && y >= -1.0) {
+        double xFar = x + xBound;
+        if (xFar > -1 && x < 1) {
+            //System.out.println(identifier + " " + true);
             return true;
-        } else {
-            return false;
         }
+        //System.out.println(identifier + " " + false);
+        return false;
     }
 }

@@ -30,7 +30,7 @@ public class DefaultTestE extends AbilityBase{
     public DefaultTestE() {
         imageInstructions = new GLInstruct() {
             public void instruct(GLAutoDrawable glAutoDrawable) {
-                QuickDraw.quickTexture(image, false, 0.25, -1.0, 0.25, 0.2, glAutoDrawable);
+                QuickDraw.quickTexture(image, 0.25, -1.0, 0.25, 0.2, glAutoDrawable);
 
             }
         };
